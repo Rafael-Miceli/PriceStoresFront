@@ -4,6 +4,8 @@ import './App.css';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
+const lastPriceColumn = "lastPrice";
+
 class App extends Component {
 
   constructor(props) {
@@ -21,6 +23,9 @@ class App extends Component {
     let productToSavePrice = this.state.productToSavePrice;
     let newProductsList = this.state.products;
 
+    //Se produto existir com o mesmo nome atualizar o preço
+    
+
     newProductsList.push({name: productToSaveName, lastPrice: productToSavePrice});
     this.setState({products: newProductsList})
   }
@@ -28,8 +33,14 @@ class App extends Component {
   cellClick(state, rowInfo, column, instance) {
     return {
       onClick: (e, handleOriginal) => {
-        console.log("Clicou no preço da coluna ", column.id);
-        console.log("Clicou no preço ", rowInfo.row[column.id]);
+
+        //Levar valor para campo de editar acima se clicou no preço
+        if(column.id == lastPriceColumn) {
+          console.log("Quero Atualizar este preço ", rowInfo.row[column.id]);
+
+          // this.setState({productToSaveName: column.id});
+          this.setState({productToSavePrice: rowInfo.row[column.id]});
+        }          
 
         if (handleOriginal) {
           handleOriginal()
@@ -47,7 +58,7 @@ class App extends Component {
         </div>
         <p className="App-intro">                    
           <span>Adicione produto e seu preço </span>
-          <input type="text" required placeholder="Produto" onChange={(e) => {this.setState({productToSaveName: e.target.value})}} />
+          <input type="text" required placeholder="Produto" onChange={(e) => {this.setState({productToSaveName: e.target.value})}} text={this.state.productToSavePrice} />
           <input type="number" step="any" required placeholder="Preço" onChange={(e) => {this.setState({productToSavePrice: e.target.value})}}/>
           {/* <input type="date" /> */}
 
@@ -62,7 +73,7 @@ class App extends Component {
               },
               {
                 Header: "Último preço visto",
-                accessor: "lastPrice"
+                accessor: lastPriceColumn
               },
               {
                 Header: "Preço mais barato",
