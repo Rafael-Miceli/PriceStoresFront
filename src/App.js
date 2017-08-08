@@ -19,10 +19,6 @@ class App extends Component {
     }
   }
 
-  componentDidMount(){
-    this.nameInput.focus();
-  }
-
   saveProduct() {
     let productToSaveName = this.state.productToSaveName;
     let productToSavePrice = this.state.productToSavePrice;
@@ -65,7 +61,7 @@ class App extends Component {
         </div>
         <p className="App-intro">                    
           <span>Adicione produto e seu preço </span>
-          <input type="text"             
+          <input type="text" autoFocus              
             required placeholder="Produto" ref={(input) => { this.nameInput = input; }}             
             onChange={(e) => {this.setState({productToSaveName: e.target.value})}} 
             value={this.state.productToSaveName}/>
