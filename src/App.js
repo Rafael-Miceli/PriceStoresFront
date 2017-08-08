@@ -19,6 +19,10 @@ class App extends Component {
     }
   }
 
+  componentDidMount(){
+    this.nameInput.focus();
+  }
+
   saveProduct() {
     let productToSaveName = this.state.productToSaveName;
     let productToSavePrice = this.state.productToSavePrice;
@@ -30,19 +34,20 @@ class App extends Component {
     this.setState({products: newProductsList})
 
     this.setState({productToSaveName: '', productToSavePrice: 0});
+    this.nameInput.focus();
   }
 
   cellClick(state, rowInfo, column, instance) {
     return {
       onClick: (e, handleOriginal) => {
+        if(rowInfo == undefined)
+          return;
 
         //Levar valor para campo de editar acima se clicou no preço
-        if(column.id == lastPriceColumn && rowInfo != undefined) {
-          console.log("Quero Atualizar este preço ", rowInfo.row[lastPriceColumn]);
+        //console.log("Quero Atualizar este preço ", rowInfo.row[lastPriceColumn]);
 
-          this.setState({productToSaveName: rowInfo.row[productName]});
-          this.setState({productToSavePrice: rowInfo.row[lastPriceColumn]});
-        }          
+        this.setState({productToSaveName: rowInfo.row[productName]});
+        this.setState({productToSavePrice: rowInfo.row[lastPriceColumn]});
 
         if (handleOriginal) {
           handleOriginal()
@@ -60,8 +65,15 @@ class App extends Component {
         </div>
         <p className="App-intro">                    
           <span>Adicione produto e seu preço </span>
-          <input type="text" required placeholder="Produto" onChange={(e) => {this.setState({productToSaveName: e.target.value})}} value={this.state.productToSaveName}/>
-          <input type="number" step="any" required placeholder="Preço" onChange={(e) => {this.setState({productToSavePrice: e.target.value})}} value={this.state.productToSavePrice}/>
+          <input type="text"             
+            required placeholder="Produto" ref={(input) => { this.nameInput = input; }}             
+            onChange={(e) => {this.setState({productToSaveName: e.target.value})}} 
+            value={this.state.productToSaveName}/>
+          <input type="number" 
+            step="any" 
+            required placeholder="Preço" 
+            onChange={(e) => {this.setState({productToSavePrice: e.target.value})}} 
+            value={this.state.productToSavePrice}/>
           {/* <input type="date" /> */}
 
           <button onClick={this.saveProduct.bind(this)}>Salvar</button>
