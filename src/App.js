@@ -25,6 +25,17 @@ class App extends Component {
     let newProductsList = this.state.products;
 
     //Se produto existir com o mesmo nome atualizar o preço    
+    var productExists = false;
+
+    newProductsList.forEach(function(element) {
+      if (element.name === productToSaveName ) {
+        //Atualizar produto
+        
+      }
+    }, this);    
+
+    if (productExists)
+      return;
 
     newProductsList.push({name: productToSaveName, lastPrice: productToSavePrice});
     this.setState({products: newProductsList})
