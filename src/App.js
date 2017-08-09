@@ -38,8 +38,13 @@ class App extends Component {
 
     if (!productExists)
       newProductsList.push({name: productToSaveName, lastPrice: productToSavePrice});  
-    
+
     this.setState({products: newProductsList});
+    
+    this.cleanFields();
+  }
+
+  cleanFields() {    
     this.setState({productToSaveName: '', productToSavePrice: 0});
     this.nameInput.focus();
   }
@@ -49,9 +54,6 @@ class App extends Component {
       onClick: (e, handleOriginal) => {
         if(rowInfo == undefined)
           return;
-
-        //Levar valor para campo de editar acima se clicou no preço
-        //console.log("Quero Atualizar este preço ", rowInfo.row[lastPriceColumn]);
 
         this.setState({productToSaveName: rowInfo.row[productName]});
         this.setState({productToSavePrice: rowInfo.row[lastPriceColumn]});
