@@ -29,17 +29,17 @@ class App extends Component {
 
     newProductsList.forEach(function(element) {
       if (element.name === productToSaveName ) {
-        //Atualizar produto
         
+        element.name = productToSaveName;
+        element.lastPrice = productToSavePrice;
+        productExists = true;
       }
     }, this);    
 
-    if (productExists)
-      return;
-
-    newProductsList.push({name: productToSaveName, lastPrice: productToSavePrice});
-    this.setState({products: newProductsList})
-
+    if (!productExists)
+      newProductsList.push({name: productToSaveName, lastPrice: productToSavePrice});  
+    
+    this.setState({products: newProductsList});
     this.setState({productToSaveName: '', productToSavePrice: 0});
     this.nameInput.focus();
   }
