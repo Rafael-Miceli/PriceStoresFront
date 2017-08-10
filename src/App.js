@@ -31,6 +31,7 @@ class App extends Component {
         
         element.name = productToSaveName;
         element.lastPrice = productToSavePrice;
+        this.updatePricesHistory();
         productExists = true;
       }
     }, this);    
@@ -39,10 +40,14 @@ class App extends Component {
       newProductsList.push({name: productToSaveName, lastPrice: productToSavePrice});  
 
     this.setState({products: newProductsList});
-    this.fetchChanges();    
+    //this.fetchChanges();    
 
     
     this.cleanFields();
+  }
+
+  updatePricesHistory() {
+    console.log("Atualizar histórico de preços");
   }
 
   fetchChanges() {
