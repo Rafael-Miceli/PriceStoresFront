@@ -24,7 +24,6 @@ class App extends Component {
     let productToSavePrice = this.state.productToSavePrice;
     let newProductsList = this.state.products;
 
-    //Se produto existir com o mesmo nome atualizar o preço    
     var productExists = false;
 
     newProductsList.forEach(function(element) {
@@ -40,8 +39,23 @@ class App extends Component {
       newProductsList.push({name: productToSaveName, lastPrice: productToSavePrice});  
 
     this.setState({products: newProductsList});
+    this.fetchChanges();    
+
     
     this.cleanFields();
+  }
+
+  fetchChanges() {
+    fetch('https://mywebsite.com/endpoint/', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        products: this.state.products
+      })
+    });
   }
 
   cleanFields() {    
