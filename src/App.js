@@ -29,9 +29,10 @@ class App extends Component {
     newProductsList.forEach(function(element) {
       if (element.name === productToSaveName ) {
         
+        this.updateLowerPricesHistory(element, productToSavePrice);
         element.name = productToSaveName;
-        element.lastPrice = productToSavePrice;
-        this.updatePricesHistory();
+        element.lastPrice = productToSavePrice;        
+        console.log("Atualizou historico de preço ", element);
         productExists = true;
       }
     }, this);    
@@ -46,8 +47,28 @@ class App extends Component {
     this.cleanFields();
   }
 
-  updatePricesHistory() {
-    console.log("Atualizar histórico de preços");
+  updateLowerPricesHistory(product, priceToUpdate) {         
+
+    let lowerPrice = product.lastPrice;
+
+    if (product.lowerPrice != undefined) 
+      lowerPrice = product.lowerPrice;
+
+    console.log("lowest price ", lowerPrice);
+    
+    if(product.lastPrice < lowerPrice) {
+      lowerPrice = product.lastPrice;      
+    }
+
+    console.log("lowest price ", lowerPrice);
+    
+    if(priceToUpdate < lowerPrice) {
+      lowerPrice = product.lastPrice;      
+    } 
+
+    console.log("lowest price ", lowerPrice);
+    
+    product.lowerPrice = lowerPrice;
   }
 
   fetchChanges() {
