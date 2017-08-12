@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "jest": "^20.0.4",
     "react-scripts": "1.0.10"
   },
   "dependencies": {
