@@ -49,24 +49,27 @@ class App extends Component {
 
   findLowerPricesHistory(product, priceToUpdate) {         
 
-    let lowerPrice = product.lastPrice;
+    let lowerPrice = product.lastPrice;     
 
-    if (product.lowerPrice != undefined) 
-      lowerPrice = product.lowerPrice;
+    if(priceToUpdate < lowerPrice) 
+      lowerPrice = priceToUpdate;      
 
-    console.log("lowest price ", lowerPrice);
+    // if (product.lowerPrice != undefined) 
+    //   lowerPrice = product.lowerPrice;
+
+    // console.log("lowest price ", lowerPrice);
     
-    if(product.lastPrice < lowerPrice) {
-      lowerPrice = product.lastPrice;      
-    }
+    // if(product.lastPrice < lowerPrice) {
+    //   lowerPrice = product.lastPrice;      
+    // }
 
-    console.log("lowest price ", lowerPrice);
+    // console.log("lowest price ", lowerPrice);
     
-    if(priceToUpdate < lowerPrice) {
-      lowerPrice = product.lastPrice;      
-    } 
+    // if(priceToUpdate < lowerPrice) {
+    //   lowerPrice = product.lastPrice;      
+    // } 
 
-    console.log("lowest price ", lowerPrice);
+    // console.log("lowest price ", lowerPrice);
     
     return lowerPrice;
   }

@@ -7,11 +7,32 @@ import App from './App';
 //   ReactDOM.render(<App />, div);
 // });
 
-test('should_get_lower_price', () => {
-  let product = {lastPrice: 2};
-  let expectedPrice = 2;
+describe('should get lower price', () => {
+  test('equals 2 when lastprice is 2 and inputing 3', () => {
+    let product = {lastPrice: 2};
+    let expectedPrice = 2;
 
-  let app = new App();
+    let app = new App();
 
-  expect(app.findLowerPricesHistory(product, 3)).toBe(expectedPrice)
-});
+    expect(app.findLowerPricesHistory(product, 3)).toBe(expectedPrice)
+  });
+
+  test('equals 2 when lastprice is 3 and inputing 2', () => {
+    let product = {lastPrice: 3};
+    let expectedPrice = 2;
+
+    let app = new App();
+
+    expect(app.findLowerPricesHistory(product, 2)).toBe(expectedPrice)
+  });
+
+  test('equals 2 when lastprice is 5 and inputing 4 and lowerPrice is 2', () => {
+    let product = {lastPrice: 5, lowerPrice: 2};
+    let expectedPrice = 2;
+
+    let app = new App();
+
+    expect(app.findLowerPricesHistory(product, 4)).toBe(expectedPrice)
+  });
+})
+
