@@ -9,6 +9,9 @@ import App from './App';
 
 test('should_get_lower_price', () => {
   let product = {lastPrice: 2};
-  let expectedProduct = {lastPrice: 2, lowerPrice: 2};
-  expect(App.updateLowerPricesHistory(product, 3)).toBe(expectedProduct)
+  let expectedPrice = 2;
+
+  let app = new App();
+
+  expect(app.findLowerPricesHistory(product, 3)).toBe(expectedPrice)
 });
