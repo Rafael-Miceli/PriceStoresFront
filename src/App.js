@@ -52,7 +52,10 @@ class App extends Component {
     let lowerPrice = product.lastPrice;     
 
     if(priceToUpdate < lowerPrice) 
-      lowerPrice = priceToUpdate;      
+      lowerPrice = priceToUpdate;  
+    
+    if(product.lowerPrice < lowerPrice) 
+      lowerPrice = product.lowerPrice;  
 
     // if (product.lowerPrice != undefined) 
     //   lowerPrice = product.lowerPrice;

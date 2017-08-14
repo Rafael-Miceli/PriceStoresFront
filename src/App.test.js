@@ -30,7 +30,7 @@ describe('should get lower price', () => {
     let product = {lastPrice: 5, lowerPrice: 2};
     let expectedPrice = 2;
 
-    let app = new App();
+    let app = new App(); 
 
     expect(app.findLowerPricesHistory(product, 4)).toBe(expectedPrice)
   });
