@@ -30,6 +30,7 @@ class App extends Component {
       if (element.name === productToSaveName ) {
         
         element.lowerPrice = this.findLowerPricesHistory(element, productToSavePrice);
+        element.higherPrice = this.findHigherPricesHistory(element, productToSavePrice);
         element.name = productToSaveName;
         element.lastPrice = productToSavePrice;        
         console.log("Atualizou historico de preço ", element);
@@ -55,26 +56,22 @@ class App extends Component {
       lowerPrice = priceToUpdate;  
     
     if(product.lowerPrice < lowerPrice) 
-      lowerPrice = product.lowerPrice;  
-
-    // if (product.lowerPrice != undefined) 
-    //   lowerPrice = product.lowerPrice;
-
-    // console.log("lowest price ", lowerPrice);
-    
-    // if(product.lastPrice < lowerPrice) {
-    //   lowerPrice = product.lastPrice;      
-    // }
-
-    // console.log("lowest price ", lowerPrice);
-    
-    // if(priceToUpdate < lowerPrice) {
-    //   lowerPrice = product.lastPrice;      
-    // } 
-
-    // console.log("lowest price ", lowerPrice);
+      lowerPrice = product.lowerPrice;     
     
     return lowerPrice;
+  }
+
+  findHigherPricesHistory(product, priceToUpdate) {         
+
+    let higherPrice = product.lastPrice;     
+
+    if(higherPrice < priceToUpdate) 
+      higherPrice = priceToUpdate;  
+    
+    if(higherPrice < product.higherPrice) 
+      higherPrice = product.higherPrice;     
+    
+    return higherPrice;
   }
 
   fetchChanges() {
