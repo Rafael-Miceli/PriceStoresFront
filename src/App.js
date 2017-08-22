@@ -24,28 +24,35 @@ class App extends Component {
     let productToSavePrice = this.state.productToSavePrice;
     let newProductsList = this.state.products;
 
-    var productExists = false;
+    let productExists = false;
 
     newProductsList.forEach(function(element) {
       if (element.name === productToSaveName ) {
-        
-        element.lowerPrice = this.findLowerPricesHistory(element, productToSavePrice);
-        element.higherPrice = this.findHigherPricesHistory(element, productToSavePrice);
-        element.name = productToSaveName;
-        element.lastPrice = productToSavePrice;        
-        console.log("Atualizou historico de preço ", element);
+        this.updatePrice(element, productToSaveName, productToSavePrice);
         productExists = true;
       }
     }, this);    
 
-    if (!productExists)
-      newProductsList.push({name: productToSaveName, lastPrice: productToSavePrice});  
+    if (!productExists) {
+      //Fetch Price Inserted
+      newProductsList.push({name: productToSaveName, lastPrice: productToSavePrice});        
+    }
+
 
     this.setState({products: newProductsList});
-    //this.fetchChanges();    
 
     
     this.cleanFields();
+  }
+
+  updatePrice(element, productToSaveName, productToSavePrice) {
+    element.lowerPrice = this.findLowerPricesHistory(element, productToSavePrice);
+    element.higherPrice = this.findHigherPricesHistory(element, productToSavePrice);
+    element.name = productToSaveName;
+    element.lastPrice = productToSavePrice;        
+    console.log("Atualizou historico de preço ", element);
+    //Fetch Price Updated
+    this.fetchPriceUpdate(element);
   }
 
   findLowerPricesHistory(product, priceToUpdate) {         
@@ -74,15 +81,16 @@ class App extends Component {
     return higherPrice;
   }
 
-  fetchChanges() {
-    fetch('https://mywebsite.com/endpoint/', {
+  fetchPriceUpdate(element) {
+
+    fetch('http://localhost:5000/api/product', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        products: this.state.products
+        product: element
       })
     });
   }
@@ -95,7 +103,7 @@ class App extends Component {
   cellClick(state, rowInfo, column, instance) {
     return {
       onClick: (e, handleOriginal) => {
-        if(rowInfo == undefined)
+        if(rowInfo === undefined)
           return;
 
         this.setState({productToSaveName: rowInfo.row[productName]});
