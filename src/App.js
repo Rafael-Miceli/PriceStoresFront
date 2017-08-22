@@ -83,15 +83,15 @@ class App extends Component {
 
   fetchPriceUpdate(element) {
 
+    console.log(JSON.stringify(element));
+
     fetch('http://localhost:5000/api/product', {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        product: element
-      })
+      body: JSON.stringify(element)
     });
   }
 
