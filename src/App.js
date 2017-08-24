@@ -83,17 +83,13 @@ class App extends Component {
 
   fetchPriceUpdate(element) {
 
-    console.log(JSON.stringify(element));
-
     fetch('http://localhost:5000/api/product', {
-      credentials: 'include',
       method: 'POST',
-      mode: "cors",
-      redirect: 'follow',
-      headers: {
-        'Accept': 'application/json',
+      mode: "cors", 
+      headers: new Headers({
         'Content-Type': 'application/json',
-      },
+        'Access-Control-Allow-Origin': '*'
+      }),
       body: JSON.stringify(element)
     })
     .then(response => console.log(response.json()));
