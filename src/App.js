@@ -86,13 +86,17 @@ class App extends Component {
     console.log(JSON.stringify(element));
 
     fetch('http://localhost:5000/api/product', {
+      credentials: 'include',
       method: 'POST',
+      mode: "cors",
+      redirect: 'follow',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(element)
-    });
+    })
+    .then(response => console.log(response.json()));
   }
 
   cleanFields() {    
