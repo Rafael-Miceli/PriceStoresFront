@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../App.css';
+import '../stores/productStores';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 

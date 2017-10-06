@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux'
+import { createStore } from 'redux'
 
 const defaultState = {
     productsResume: [{
@@ -8,3 +8,7 @@ const defaultState = {
         maxPrice: 0
     }]
 }
+
+const store = createStore((state = defaultState) => {
+    return state;
+})
