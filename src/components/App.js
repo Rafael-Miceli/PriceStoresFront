@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../App.css';
 import { store } from '../stores/productStores';
+import { saveProduct } from '../actions/App';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
@@ -12,6 +13,8 @@ class App extends Component {
 
   constructor(props) {
     super(props);
+
+    //store.subscribe();
     
     // this.state = {
     //   productToSaveName: "",
@@ -25,26 +28,28 @@ class App extends Component {
   }
 
   saveProduct() {
-    let productToSaveName = this.state.productToSaveName;
-    let productToSavePrice = this.state.productToSavePrice;
-    let newProductsList = this.state.products;
 
-    let productExists = false;
+    store.dispatch(saveProduct({name: this.state.productToSaveName, price: this.state.productToSavePrice}));
+    // let productToSaveName = this.state.productToSaveName;
+    // let productToSavePrice = this.state.productToSavePrice;
+    // let newProductsList = this.state.products;
 
-    newProductsList.forEach(function(element) {
-      if (element.name === productToSaveName ) {
-        this.updatePrice(element, productToSaveName, productToSavePrice);
-        productExists = true;
-      }
-    }, this);    
+    // let productExists = false;
 
-    if (!productExists) {
-      //Fetch Price Inserted
-      newProductsList.push({name: productToSaveName, lastPrice: productToSavePrice});        
-    }
+    // newProductsList.forEach(function(element) {
+    //   if (element.name === productToSaveName ) {
+    //     this.updatePrice(element, productToSaveName, productToSavePrice);
+    //     productExists = true;
+    //   }
+    // }, this);    
+
+    // if (!productExists) {
+    //   //Fetch Price Inserted
+    //   newProductsList.push({name: productToSaveName, lastPrice: productToSavePrice});        
+    // }
 
 
-    this.setState({products: newProductsList});
+    // this.setState({products: newProductsList});
 
     
     this.cleanFields();
@@ -131,15 +136,19 @@ class App extends Component {
         <p className="App-intro">                    
           <span>Adicione produto e seu preço </span>
           <input type="text" autoFocus              
-            required placeholder="Produto" />
-            {/* ref={(input) => { this.nameInput = input; }}             
+            required placeholder="Produto" 
+            ref={(input) => { this.nameInput = input; }}             
             onChange={(e) => {this.setState({productToSaveName: e.target.value})}} 
-            value={this.state.productToSaveName} */}
+            value={this.state.productToSaveName} 
+            />
+            
           <input type="number" 
             step="any" 
-            required placeholder="Preço" />
-            {/* onChange={(e) => {this.setState({productToSavePrice: e.target.value})}} 
-            value={this.state.productToSavePrice} */}
+            required placeholder="Preço" 
+            onChange={(e) => {this.setState({productToSavePrice: e.target.value})}} 
+            value={this.state.productToSavePrice}
+            />
+            
           {/* <input type="date" /> */}
 
           <button onClick={this.saveProduct.bind(this)}>Salvar</button>

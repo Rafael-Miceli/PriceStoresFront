@@ -1,14 +1,4 @@
 import { createStore } from 'redux'
+import { productReducer } from '../reducers/products'
 
-const defaultState = {
-    productsResume: [{
-        name: "Teste",
-        lastPrice: 0,
-        lowerPrice: 0,
-        higherPrice: 0
-    }]
-}
-
-export const store = createStore((state = defaultState) => {
-    return state;
-})
+export const store = createStore(productReducer);

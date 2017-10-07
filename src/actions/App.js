@@ -1,16 +1,27 @@
-import productService from '../api/product'
-import * as types from '../constants/ActionTypes'
+import { SAVE_PRODUCT } from '../constants/ActionTypes'
 
-const receiveProducts = products => ({
-  type: types.GET_PRODUCT_RESUME,
-  products: products
-})
-
-export const getAllProductsResumed = () => dispatch => {
-    productService.getAllProductsResumed(products => {
-    dispatch(receiveProducts(products))
-  })
+export const saveProduct = (product) => {
+  return {
+    type: SAVE_PRODUCT,
+    product
+  }
 }
+
+
+
+// import productService from '../api/product'
+// import * as types from '../constants/ActionTypes'
+
+// const receiveProducts = products => ({
+//   type: types.GET_PRODUCT_RESUME,
+//   products: products
+// })
+
+// export const getAllProductsResumed = () => dispatch => {
+//     productService.getAllProductsResumed(products => {
+//     dispatch(receiveProducts(products))
+//   })
+// }
 
 // const addToCartUnsafe = productId => ({
 //   type: types.ADD_TO_CART,
