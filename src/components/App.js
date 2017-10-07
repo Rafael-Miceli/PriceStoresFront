@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../App.css';
-import '../stores/productStores';
+import { store } from '../stores/productStores';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
@@ -13,11 +13,15 @@ class App extends Component {
   constructor(props) {
     super(props);
     
-    this.state = {
-      productToSaveName: "",
-      productToSavePrice: 0,
-      products: []
-    }
+    // this.state = {
+    //   productToSaveName: "",
+    //   productToSavePrice: 0,
+    //   products: []
+    // }
+
+    this.state = store.getState();
+
+    console.log(this.state);
   }
 
   saveProduct() {
@@ -127,28 +131,29 @@ class App extends Component {
         <p className="App-intro">                    
           <span>Adicione produto e seu preço </span>
           <input type="text" autoFocus              
-            required placeholder="Produto" ref={(input) => { this.nameInput = input; }}             
+            required placeholder="Produto" />
+            {/* ref={(input) => { this.nameInput = input; }}             
             onChange={(e) => {this.setState({productToSaveName: e.target.value})}} 
-            value={this.state.productToSaveName}/>
+            value={this.state.productToSaveName} */}
           <input type="number" 
             step="any" 
-            required placeholder="Preço" 
-            onChange={(e) => {this.setState({productToSavePrice: e.target.value})}} 
-            value={this.state.productToSavePrice}/>
+            required placeholder="Preço" />
+            {/* onChange={(e) => {this.setState({productToSavePrice: e.target.value})}} 
+            value={this.state.productToSavePrice} */}
           {/* <input type="date" /> */}
 
           <button onClick={this.saveProduct.bind(this)}>Salvar</button>
 
           <ReactTable
-            data={this.state.products}
+            data={this.state.productsResume}
             columns={[
               {
                 Header: "Produto",
-                accessor: productName
+                accessor: "name"
               },
               {
                 Header: "Último preço visto",
-                accessor: lastPriceColumn
+                accessor: "lastPrice"
               },
               {
                 Header: "Preço mais barato",
