@@ -28,7 +28,6 @@ class App extends Component {
   }
 
   saveProduct() {
-
     store.dispatch(saveProduct({name: this.state.productToSaveName, price: this.state.productToSavePrice}));
     // let productToSaveName = this.state.productToSaveName;
     // let productToSavePrice = this.state.productToSavePrice;
@@ -137,15 +136,15 @@ class App extends Component {
           <span>Adicione produto e seu preço </span>
           <input type="text" autoFocus              
             required placeholder="Produto" 
-            ref={(input) => { this.nameInput = input; }}             
-            onChange={(e) => {this.setState({productToSaveName: e.target.value})}} 
+            ref={input => { this.nameInput = input; }}             
+            onChange={e => {this.setState({productToSaveName: e.target.value})}} 
             value={this.state.productToSaveName} 
             />
             
           <input type="number" 
             step="any" 
             required placeholder="Preço" 
-            onChange={(e) => {this.setState({productToSavePrice: e.target.value})}} 
+            onChange={e => {this.setState({productToSavePrice: e.target.value})}} 
             value={this.state.productToSavePrice}
             />
             
