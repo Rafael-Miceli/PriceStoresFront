@@ -1,15 +1,15 @@
 // import { combineReducers } from 'redux'
-import { SAVE_PRODUCT } from '../constants/ActionTypes'
+import { SAVE_PRODUCT, GET_PRODUCTS_RESUME } from '../constants/ActionTypes'
 
 
-const defaultState = {
-    productsResume: [{
-        name: "Teste",
-        lastPrice: 0,
-        lowerPrice: 0,
-        higherPrice: 0
-    }]
-}
+// const defaultState = {
+//     productsResume: [{
+//         name: "Teste",
+//         lastPrice: 0,
+//         lowerPrice: 0,
+//         higherPrice: 0
+//     }]
+// }
 
 // const products = (state, action) => {
 //   switch (action.type) {
@@ -65,13 +65,23 @@ const defaultState = {
 // export const getVisibleProducts = state =>
 //   state.visibleIds.map(name => getProduct(state, name))
 
-export const productReducer = (state = defaultState, {type, value}) => {
+export const productReducer = (state, {type, value}) => {
+    console.log("Dentro de product reducer ", value)
+    console.log("Tipo de product reducer ", type)
+
     switch (type) {
         case SAVE_PRODUCT:  
             //Mudar o estado aqui
             console.log("State atual ", state);
             console.log("Salvando novo produto ", value);
             return {...state, newProduct: value};
+        case GET_PRODUCTS_RESUME:
+            console.log("State atual ", state);
+            console.log("Buscando produtos ", value);
+            state = {
+                productsResume: value
+            };
+            return state           
         default:
             return state;
     }

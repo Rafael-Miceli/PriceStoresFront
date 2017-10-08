@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import logo from '../logo.svg';
 import '../App.css';
 import { store } from '../stores/productStores';
-import { saveProduct } from '../actions/App';
+import { saveProduct, getProductsResume } from '../actions/App';
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 
@@ -14,7 +14,8 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    //store.subscribe();
+    console.log("Dispacth para buscar os produtos");
+    store.dispatch(getProductsResume());
     
     // this.state = {
     //   productToSaveName: "",
@@ -22,9 +23,9 @@ class App extends Component {
     //   products: []
     // }
 
+    console.log("Indo buscar estado");
     this.state = store.getState();
-
-    console.log(this.state);
+    console.log("Estado inicial ", this.state);
   }
 
   saveProduct() {
