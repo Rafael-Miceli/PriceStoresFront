@@ -67,7 +67,10 @@ const defaultState = {
 
 export const productReducer = (state = defaultState, {type, value}) => {
     switch (type) {
-        case SAVE_PRODUCT:            
+        case SAVE_PRODUCT:  
+            //Mudar o estado aqui
+            console.log("State atual ", state);
+            console.log("Salvando novo produto ", value);
             return {...state, newProduct: value};
         default:
             return state;

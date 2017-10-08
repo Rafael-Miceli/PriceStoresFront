@@ -1,9 +1,12 @@
 import { SAVE_PRODUCT } from '../constants/ActionTypes'
 
 export const saveProduct = (product) => {
+
+  console.log("Salvando produto ", product)
+
   return {
     type: SAVE_PRODUCT,
-    product
+    value: product
   }
 }
 

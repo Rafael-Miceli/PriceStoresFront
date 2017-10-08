@@ -136,7 +136,7 @@ class App extends Component {
           <span>Adicione produto e seu preço </span>
           <input type="text" autoFocus              
             required placeholder="Produto" 
-            ref={input => { this.nameInput = input; }}             
+            ref={(input) => { this.nameInput = input; }}             
             onChange={e => {this.setState({productToSaveName: e.target.value})}} 
             value={this.state.productToSaveName} 
             />
