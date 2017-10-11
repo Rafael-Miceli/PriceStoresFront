@@ -1,13 +1,19 @@
 
 export const getAllProductsResume = cb => {
-    console.log("Buscando produtos na base")    
-        
-    fetch('http://localhost:5001/api/product', {
-        method: 'GET'
+    console.log("Buscando produtos na base")
+    fetch('http://localhost:5000/api/product', {
+        method: 'GET',
     })
     .then(response => {
-        console.log("Resposta ", response.json())
-        cb(response.json())
+        if(response.status !== 200)
+            console.log("Algo deu errado ", response)
+
+        response.json()
+        .then(json => {
+            console.log("json retornado ", json)
+            cb(json);
+        })
     });
-    //setTimeout(cb(defaultState.productsResume), 500)
 }
+
+//https://developers.google.com/web/updates/2015/03/introduction-to-fetch
