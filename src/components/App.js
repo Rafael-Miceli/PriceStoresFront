@@ -15,13 +15,7 @@ class App extends Component {
     super(props);
 
     console.log("Dispacth para buscar os produtos");
-    store.dispatch(getProductsResume());
-    
-    // this.state = {
-    //   productToSaveName: "",
-    //   productToSavePrice: 0,
-    //   products: []
-    // }
+    store.dispatch(getProductsResume());    
 
     console.log("Indo buscar estado");
     this.state = store.getState();
