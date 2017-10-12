@@ -1,8 +1,17 @@
 import { SAVE_PRODUCT, GET_PRODUCTS_RESUME } from '../constants/ActionTypes'
 
+const defaultState = {
+    productToSavePrice: 0,
+    productToSaveName: '',
+    productsResume: []
+}
+
 export const productReducer = (state, {type, value}) => {
     console.log("Dentro de product reducer ", value)
     console.log("Tipo de product reducer ", type)
+
+    if(state === undefined)
+        state = defaultState;
 
     switch (type) {
         case SAVE_PRODUCT:  
@@ -18,6 +27,6 @@ export const productReducer = (state, {type, value}) => {
             };
             return state           
         default:
-            return state;
+            return state
     }
 }
