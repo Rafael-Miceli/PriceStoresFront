@@ -47,42 +47,6 @@ class App extends Component {
     this.cleanFields();
   }
 
-  // updatePrice(element, productToSaveName, productToSavePrice) {
-  //   element.lowerPrice = this.findLowerPricesHistory(element, productToSavePrice);
-  //   element.higherPrice = this.findHigherPricesHistory(element, productToSavePrice);
-  //   element.name = productToSaveName;
-  //   element.lastPrice = productToSavePrice;        
-  //   console.log("Atualizou historico de preço ", element);
-  //   //Fetch Price Updated
-  //   this.fetchPriceUpdate(element);
-  // }
-
-  // findLowerPricesHistory(product, priceToUpdate) {         
-
-  //   let lowerPrice = product.lastPrice;     
-
-  //   if(priceToUpdate < lowerPrice) 
-  //     lowerPrice = priceToUpdate;  
-    
-  //   if(product.lowerPrice < lowerPrice) 
-  //     lowerPrice = product.lowerPrice;     
-    
-  //   return lowerPrice;
-  // }
-
-  // findHigherPricesHistory(product, priceToUpdate) {         
-
-  //   let higherPrice = product.lastPrice;     
-
-  //   if(higherPrice < priceToUpdate) 
-  //     higherPrice = priceToUpdate;  
-    
-  //   if(higherPrice < product.higherPrice) 
-  //     higherPrice = product.higherPrice;     
-    
-  //   return higherPrice;
-  // }
-
   fetchPriceUpdate(element) {
 
     fetch('http://localhost:5000/api/product', {

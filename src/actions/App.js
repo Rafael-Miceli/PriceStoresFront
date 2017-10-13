@@ -16,7 +16,12 @@ export const saveProduct = productsState => {
 
   if (!productExists) {
     //Fetch Price Inserted
-    productsResume.push({name: productToSave.name, lastPrice: productToSave.price});        
+    productsResume.push({
+      name: productToSave.name, 
+      lastPrice: productToSave.price,
+      lowerPrice: productToSave.price,
+      higherPrice: productToSave.price
+    });        
   }
   
   console.log("Salvando produto ", productsState)  
