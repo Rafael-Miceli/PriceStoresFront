@@ -1,6 +1,8 @@
 const defaultState = {
-    productToSavePrice: 0,
-    productToSaveName: '',
+    productToSave:{
+        name: '',
+        price: 0
+    },
     productsResume: []
 }
 

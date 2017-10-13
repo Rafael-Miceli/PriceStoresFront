@@ -135,14 +135,14 @@ class App extends Component {
             required placeholder="Produto" 
             ref={(input) => { this.nameInput = input; }}             
             onChange={e => {this.setState({productToSaveName: e.target.value})}} 
-            value={this.state.productToSaveName} 
+            value={this.state.productToSave.name} 
             />
             
           <input type="number" 
             step="any" 
             required placeholder="Preço" 
             onChange={e => {this.setState({productToSavePrice: e.target.value})}} 
-            value={this.state.productToSavePrice}
+            value={this.state.productToSave.price}
             />
             
           {/* <input type="date" /> */}

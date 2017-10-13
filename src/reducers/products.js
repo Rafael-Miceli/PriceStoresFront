@@ -1,8 +1,10 @@
 import { SAVE_PRODUCT, GET_PRODUCTS_RESUME } from '../constants/ActionTypes'
 
 const defaultState = {
-    productToSavePrice: 0,
-    productToSaveName: '',
+    productToSave:{
+        name: '',
+        price: 0
+    },
     productsResume: []
 }
 
