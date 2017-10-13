@@ -134,14 +134,22 @@ class App extends Component {
           <input type="text" autoFocus              
             required placeholder="Produto" 
             ref={(input) => { this.nameInput = input; }}             
-            onChange={e => {this.setState({productToSaveName: e.target.value})}} 
+            onChange={e => {
+              let productToSave = {...this.state.productToSave}
+              productToSave.name = e.target.value;
+              this.setState({productToSave})
+            }} 
             value={this.state.productToSave.name} 
             />
             
           <input type="number" 
             step="any" 
             required placeholder="Preço" 
-            onChange={e => {this.setState({productToSavePrice: e.target.value})}} 
+            onChange={e => {
+              let productToSave = {...this.state.productToSave}
+              productToSave.price = e.target.value;
+              this.setState({productToSave})
+            }} 
             value={this.state.productToSave.price}
             />
             
