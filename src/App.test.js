@@ -1,31 +1,58 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { saveProduct } from './actions/App';
+import { saveProduct as sut } from './actions/App';
 
 describe('should get lower price', () => {
-  test('equals 2 when lastprice is 2 and inputing 3', () => {
+  test('equals 2 when lastprice is 2, lowestprice is 2, and inputing 3', () => {
     let inputingPrice = 3    
     let productState = { 
-      productToSave: {price: 2, name: '' },
+      productToSave: {price: inputingPrice, name: 'a' },
       productsResume: [{
+        name: 'a',
         lastPrice: 2,
         lowerPrice: 2
       }]
     }
     
     let expectedPrice = 2
+    let result = sut(productState).value
 
-    expect(saveProduct(productState).value.productsResume[1].lowerPrice).toBe(expectedPrice)
+    expect(result.productsResume[0].lowerPrice).toBe(expectedPrice)
   });
 
-  test('equals 2 when lastprice is 3 and inputing 2', () => {
-    let product = {lastPrice: 3};
-    let expectedPrice = 2;
+  test('equals 2 when lastprice is 3, lowestprice is 3 and inputing 2', () => {
+    let inputingPrice = 2    
+    let productState = { 
+      productToSave: {price: inputingPrice, name: 'a' },
+      productsResume: [{
+        name: 'a',
+        lastPrice: 3,
+        lowerPrice: 3
+      }]
+    }
+    
+    let expectedPrice = 2
+    let result = sut(productState).value
 
-    expect(saveProduct(product, 2)).toBe(expectedPrice)
+    expect(result.productsResume[0].lowerPrice).toBe(expectedPrice)
   });
 
   test('equals 2 when lastprice is 5 and inputing 4 and lowerPrice is 2', () => {
+    let inputingPrice = 4    
+    let productState = { 
+      productToSave: {price: inputingPrice, name: 'a' },
+      productsResume: [{
+        name: 'a',
+        lastPrice: 5,
+        lowerPrice: 3
+      }]
+    }
+    
+    let expectedPrice = 2
+    let result = sut(productState).value
+
+    expect(result.productsResume[0].lowerPrice).toBe(expectedPrice)
+
     let product = {lastPrice: 5, lowerPrice: 2};
     let expectedPrice = 2;
 
