@@ -23,7 +23,7 @@ class App extends Component {
   }
 
   saveProduct() {
-    store.dispatch(saveProduct({name: this.state.productToSaveName, price: this.state.productToSavePrice}));
+    store.dispatch(saveProduct({name: this.state.productToSave.name, price: this.state.productToSave.price}));
     // let productToSaveName = this.state.productToSaveName;
     // let productToSavePrice = this.state.productToSavePrice;
     // let newProductsList = this.state.products;
@@ -43,9 +43,7 @@ class App extends Component {
     // }
 
 
-    // this.setState({products: newProductsList});
-
-    
+    // this.setState({products: newProductsList});    
     this.cleanFields();
   }
 
@@ -100,7 +98,11 @@ class App extends Component {
   }
 
   cleanFields() {    
-    this.setState({productToSaveName: '', productToSavePrice: 0});
+    let productToSave = {...this.state.productToSave}
+    productToSave.name = '';
+    productToSave.price = 0;    
+    this.setState({productToSave})
+
     this.nameInput.focus();
   }
 
