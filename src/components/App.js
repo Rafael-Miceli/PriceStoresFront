@@ -23,7 +23,7 @@ class App extends Component {
   }
 
   saveProduct() {
-    store.dispatch(saveProduct({name: this.state.productToSave.name, price: this.state.productToSave.price}));
+    store.dispatch(saveProduct(this.state));
     // let productToSaveName = this.state.productToSaveName;
     // let productToSavePrice = this.state.productToSavePrice;
     // let newProductsList = this.state.products;
@@ -47,41 +47,41 @@ class App extends Component {
     this.cleanFields();
   }
 
-  updatePrice(element, productToSaveName, productToSavePrice) {
-    element.lowerPrice = this.findLowerPricesHistory(element, productToSavePrice);
-    element.higherPrice = this.findHigherPricesHistory(element, productToSavePrice);
-    element.name = productToSaveName;
-    element.lastPrice = productToSavePrice;        
-    console.log("Atualizou historico de preço ", element);
-    //Fetch Price Updated
-    this.fetchPriceUpdate(element);
-  }
+  // updatePrice(element, productToSaveName, productToSavePrice) {
+  //   element.lowerPrice = this.findLowerPricesHistory(element, productToSavePrice);
+  //   element.higherPrice = this.findHigherPricesHistory(element, productToSavePrice);
+  //   element.name = productToSaveName;
+  //   element.lastPrice = productToSavePrice;        
+  //   console.log("Atualizou historico de preço ", element);
+  //   //Fetch Price Updated
+  //   this.fetchPriceUpdate(element);
+  // }
 
-  findLowerPricesHistory(product, priceToUpdate) {         
+  // findLowerPricesHistory(product, priceToUpdate) {         
 
-    let lowerPrice = product.lastPrice;     
+  //   let lowerPrice = product.lastPrice;     
 
-    if(priceToUpdate < lowerPrice) 
-      lowerPrice = priceToUpdate;  
+  //   if(priceToUpdate < lowerPrice) 
+  //     lowerPrice = priceToUpdate;  
     
-    if(product.lowerPrice < lowerPrice) 
-      lowerPrice = product.lowerPrice;     
+  //   if(product.lowerPrice < lowerPrice) 
+  //     lowerPrice = product.lowerPrice;     
     
-    return lowerPrice;
-  }
+  //   return lowerPrice;
+  // }
 
-  findHigherPricesHistory(product, priceToUpdate) {         
+  // findHigherPricesHistory(product, priceToUpdate) {         
 
-    let higherPrice = product.lastPrice;     
+  //   let higherPrice = product.lastPrice;     
 
-    if(higherPrice < priceToUpdate) 
-      higherPrice = priceToUpdate;  
+  //   if(higherPrice < priceToUpdate) 
+  //     higherPrice = priceToUpdate;  
     
-    if(higherPrice < product.higherPrice) 
-      higherPrice = product.higherPrice;     
+  //   if(higherPrice < product.higherPrice) 
+  //     higherPrice = product.higherPrice;     
     
-    return higherPrice;
-  }
+  //   return higherPrice;
+  // }
 
   fetchPriceUpdate(element) {
 
