@@ -23,27 +23,7 @@ class App extends Component {
   }
 
   saveProduct() {
-    store.dispatch(saveProduct(this.state));
-    // let productToSaveName = this.state.productToSaveName;
-    // let productToSavePrice = this.state.productToSavePrice;
-    // let newProductsList = this.state.products;
-
-    // let productExists = false;
-
-    // newProductsList.forEach(function(element) {
-    //   if (element.name === productToSaveName ) {
-    //     this.updatePrice(element, productToSaveName, productToSavePrice);
-    //     productExists = true;
-    //   }
-    // }, this);    
-
-    // if (!productExists) {
-    //   //Fetch Price Inserted
-    //   newProductsList.push({name: productToSaveName, lastPrice: productToSavePrice});        
-    // }
-
-
-    // this.setState({products: newProductsList});    
+    store.dispatch(saveProduct(this.state));    
     this.cleanFields();
   }
 
