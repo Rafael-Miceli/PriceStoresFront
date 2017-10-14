@@ -18,17 +18,17 @@ export const productReducer = (state, {type, value}) => {
     switch (type) {
         case SAVE_PRODUCT:  
             //Mudar o estado aqui
-            console.log("State atual ", state);
-            console.log("Salvando novo produto ", value);
-            return {...state, newProduct: value};
+            console.log("State atual ", state)
+            console.log("Salvando novo produto ", value)
+            return {...state, newProduct: value}
         case GET_PRODUCTS_RESUME:
-            console.log("State atual ", state);
-            console.log("Buscando produtos ", value);
+            console.log("State atual ", state)
+            console.log("Buscando produtos ", value)
             state = {
                 productsResume: value
             };
-            return state           
+            return {...state}
         default:
-            return state
+            return {...state}
     }
 }

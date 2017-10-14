@@ -21,16 +21,10 @@ export const saveProduct = productsState => {
   }, this);    
 
   if (!productExists) {
-    //Fetch Price Inserted
     let productAdding = {name: productToSave.name, price: productToSave.price};
 
     addProduct(productAdding, response => {
       console.log("Adding: resultado vindo da api ", response)      
-
-      // dispatch({
-      //     type: SAVE_PRODUCT,
-      //     value: response
-      // })
     })
 
     productsResume.push({
@@ -55,8 +49,6 @@ const updatePrice = (element, productToSaveName, productToSavePrice) => {
   element.name = productToSaveName;
   element.lastPrice = productToSavePrice;        
   console.log("Atualizou historico de preço ", element);
-  //Fetch Price Updated
-  //this.fetchPriceUpdate(element);
 }
 
 const findLowerPricesHistory = (product, priceToUpdate) => {         
