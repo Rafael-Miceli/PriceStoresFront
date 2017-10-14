@@ -26,21 +26,7 @@ class App extends Component {
     store.dispatch(saveProduct(this.state));    
     this.cleanFields();
   }
-
-  fetchPriceUpdate(element) {
-
-    fetch('http://localhost:5000/api/product', {
-      method: 'POST',
-      //mode: "cors", 
-      headers: new Headers({
-        'Content-Type': 'application/json'
-        //'Access-Control-Allow-Origin': '*'
-      }),
-      body: JSON.stringify(element)
-    })
-    .then(response => console.log(response.json()));
-  }
-
+  
   cleanFields() {    
     let productToSave = {...this.state.productToSave}
     productToSave.name = '';
@@ -54,10 +40,12 @@ class App extends Component {
     return {
       onClick: (e, handleOriginal) => {
         if(rowInfo === undefined)
-          return;
+          return
 
-        this.setState({productToSaveName: rowInfo.row[productName]});
-        this.setState({productToSavePrice: rowInfo.row[lastPriceColumn]});
+        let productToSave = {...this.state.productToSave}
+        productToSave.name = rowInfo.row[productName]
+        productToSave.price = rowInfo.row[lastPriceColumn]
+        this.setState({productToSave})
 
         if (handleOriginal) {
           handleOriginal()

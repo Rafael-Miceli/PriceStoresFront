@@ -12,7 +12,7 @@ export const saveProduct = productsState => {
       let productUpdating = {oldName: productToSave.name, newName: productToSave.name, price: productToSave.price}
       
       updateProduct(productUpdating, response => {
-        console.log("resultado vindo da api ", response)        
+        console.log("Update: resultado vindo da api ", response)        
       })
 
       updatePrice(product, productToSave.name, productToSave.price)
@@ -25,7 +25,7 @@ export const saveProduct = productsState => {
     let productAdding = {name: productToSave.name, price: productToSave.price};
 
     addProduct(productAdding, response => {
-      console.log("resultado vindo da api ", response)      
+      console.log("Adding: resultado vindo da api ", response)      
 
       // dispatch({
       //     type: SAVE_PRODUCT,
