@@ -211,8 +211,8 @@ describe('should get higher price', () => {
   })
 })
 
-describe('When adding a product', () => {
-  test('Then call addProduct api', () => {
+describe('When saving a product', () => {
+  test('It does not exists then call addProduct api', () => {
     let inputingPrice = 1.75
     let productState = { 
       productToSave: {price: inputingPrice, name: 'novo' },
@@ -230,10 +230,27 @@ describe('When adding a product', () => {
 
     expect(apiProduct.addProduct).toHaveBeenCalled();
   })
-})
 
-describe('When updating a product', () => {
-  test('Then call updateProduct api', () => {
+  test('It does not exists then add to product array', () => {
+    let inputingPrice = 1.75
+    let productState = { 
+      productToSave: {price: inputingPrice, name: 'novo' },
+      productsResume: [{
+        name: 'a',
+        lastPrice: 1.80,
+        higherPrice: 1.77
+      }]
+    }    
+    let expectedPrice = 1.80
+
+    apiProduct.addProduct = jest.fn()
+
+    let result = sut(productState).value
+
+    expect(result.productsResume[1].name).toBe('novo')
+  })
+
+  test('It exists then call updateProduct api', () => {
     let inputingPrice = 1.75
     let productState = { 
       productToSave: {price: inputingPrice, name: 'a' },
@@ -250,5 +267,24 @@ describe('When updating a product', () => {
     let result = sut(productState).value
 
     expect(apiProduct.updateProduct).toHaveBeenCalled();
+  })
+
+  test('It exists then DO NOT add to product array', () => {
+    let inputingPrice = 1.75
+    let productState = { 
+      productToSave: {price: inputingPrice, name: 'a' },
+      productsResume: [{
+        name: 'a',
+        lastPrice: 1.80,
+        higherPrice: 1.77
+      }]
+    }    
+    let expectedPrice = 1.80
+
+    apiProduct.updateProduct = jest.fn()
+
+    let result = sut(productState).value
+
+    expect(result.productsResume[1]).toBeUndefined()
   })
 })

@@ -32,14 +32,14 @@ export const saveProduct = productsState => {
       //     value: response
       // })
     })
-  }
 
-  productsResume.push({
-    name: productToSave.name, 
-    lastPrice: productToSave.price,
-    lowerPrice: productToSave.price,
-    higherPrice: productToSave.price
-  })
+    productsResume.push({
+      name: productToSave.name, 
+      lastPrice: productToSave.price,
+      lowerPrice: productToSave.price,
+      higherPrice: productToSave.price
+    })
+  }  
   
   console.log("Salvando produto ", productsState)  
 
