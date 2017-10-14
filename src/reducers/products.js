@@ -24,9 +24,9 @@ export const productReducer = (state, {type, value}) => {
         case GET_PRODUCTS_RESUME:
             console.log("State atual ", state)
             console.log("Buscando produtos ", value)
-            state = {
-                productsResume: value
-            };
+
+            state = value
+            
             return {...state}
         default:
             return {...state}
