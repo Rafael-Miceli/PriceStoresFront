@@ -29,47 +29,39 @@ export const getAllProductsResume = cb => {
     })
 }
 
-export const AddProduct = cb => {
-    console.log("Buscando produtos na base")
-    fetch('http://localhost:5000/api/product')
-    .then(response => {
-        if(response.status !== 200) {
-            console.log("Algo deu errado ", response)            
-            cb(defaultState)
-        }
-
-        response.json()
-        .then(json => {            
-            console.log("json retornado ", json)
-            defaultState.productsResume = json
-            cb(defaultState);
-        })
+export const addProduct = (product, cb) => {
+    console.log("Adicionando produto na base")
+    fetch('http://localhost:5000/api/product', {
+        method: 'POST',
+        //mode: "cors", 
+        headers: new Headers({
+          'Content-Type': 'application/json'
+          //'Access-Control-Allow-Origin': '*'
+        }),
+        body: JSON.stringify(product)
     })
+    .then(response => console.log(response.json()))
     .catch(error => {
         console.log("Algo deu errado ", error)            
-        cb(defaultState)        
+        cb(null)        
     })
 }
 
-export const UpdateProduct = cb => {
-    console.log("Buscando produtos na base")
-    fetch('http://localhost:5000/api/product')
-    .then(response => {
-        if(response.status !== 200) {
-            console.log("Algo deu errado ", response)            
-            cb(defaultState)
-        }
-
-        response.json()
-        .then(json => {            
-            console.log("json retornado ", json)
-            defaultState.productsResume = json
-            cb(defaultState);
-        })
+export const updateProduct = (product, cb) => {
+    console.log("Atualizando produto na base")
+    fetch('http://localhost:5000/api/product', {
+        method: 'PUT',
+        //mode: "cors", 
+        headers: new Headers({
+          'Content-Type': 'application/json'
+          //'Access-Control-Allow-Origin': '*'
+        }),
+        body: JSON.stringify(product)
     })
+    .then(response => console.log(response.json()))
     .catch(error => {
         console.log("Algo deu errado ", error)            
-        cb(defaultState)        
+        cb(null)        
     })
 }
 

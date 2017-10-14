@@ -1,5 +1,5 @@
 import { SAVE_PRODUCT, GET_PRODUCTS_RESUME } from '../constants/ActionTypes'
-import { getAllProductsResume } from '../api/product'
+import { getAllProductsResume, addProduct, updateProduct } from '../api/product'
 
 export const saveProduct = productsState => {
 
@@ -9,20 +9,37 @@ export const saveProduct = productsState => {
 
   productsResume.forEach(function(product) {
     if (product.name === productToSave.name ) {
-      updatePrice(product, productToSave.name, productToSave.price);
-      productExists = true;
+      let productUpdating = {oldName: productToSave.name, newName: productToSave.name, price: productToSave.price}
+      
+      updateProduct(productUpdating, response => {
+        console.log("resultado vindo da api ", response)        
+      })
+
+      updatePrice(product, productToSave.name, productToSave.price)
+      productExists = true
     }
   }, this);    
 
   if (!productExists) {
     //Fetch Price Inserted
-    productsResume.push({
-      name: productToSave.name, 
-      lastPrice: productToSave.price,
-      lowerPrice: productToSave.price,
-      higherPrice: productToSave.price
-    });        
+    let productAdding = {name: productToSave.name, price: productToSave.price};
+
+    addProduct(productAdding, response => {
+      console.log("resultado vindo da api ", response)      
+
+      // dispatch({
+      //     type: SAVE_PRODUCT,
+      //     value: response
+      // })
+    })
   }
+
+  productsResume.push({
+    name: productToSave.name, 
+    lastPrice: productToSave.price,
+    lowerPrice: productToSave.price,
+    higherPrice: productToSave.price
+  })
   
   console.log("Salvando produto ", productsState)  
 
@@ -31,7 +48,6 @@ export const saveProduct = productsState => {
     value: productsState
   }
 }
-
 
 const updatePrice = (element, productToSaveName, productToSavePrice) => {
   element.lowerPrice = findLowerPricesHistory(element, productToSavePrice);

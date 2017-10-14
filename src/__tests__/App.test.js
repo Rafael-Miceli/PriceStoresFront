@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { saveProduct as sut } from '../actions/App';
+import  * as apiProduct from '../api/product';
 
 describe('should get lower price', () => {
   test('equals 2 when lastprice is 2, lowestprice is 2, and inputing 3', () => {
@@ -18,7 +19,7 @@ describe('should get lower price', () => {
     let result = sut(productState).value
 
     expect(result.productsResume[0].lowerPrice).toBe(expectedPrice)
-  });
+  })
 
   test('equals 2 when lastprice is 3, lowestprice is 3 and inputing 2', () => {
     let inputingPrice = 2    
@@ -35,7 +36,7 @@ describe('should get lower price', () => {
     let result = sut(productState).value
 
     expect(result.productsResume[0].lowerPrice).toBe(expectedPrice)
-  });
+  })
 
   test('equals 2 when lastprice is 5 and inputing 4 and lowerPrice is 2', () => {
     let inputingPrice = 4    
@@ -52,7 +53,7 @@ describe('should get lower price', () => {
     let result = sut(productState).value
 
     expect(result.productsResume[0].lowerPrice).toBe(expectedPrice)
-  });
+  })
 
   test('equals 2 when lastprice is 2 and inputing 4 and lowerPrice is 2', () => {
     let inputingPrice = 4    
@@ -69,7 +70,7 @@ describe('should get lower price', () => {
     let result = sut(productState).value
 
     expect(result.productsResume[0].lowerPrice).toBe(expectedPrice)
-  });
+  })
 
   test('equals 1.75 when lastprice is 2 and inputing 4 and lowerPrice is 1.75', () => {
     let inputingPrice = 4    
@@ -86,7 +87,7 @@ describe('should get lower price', () => {
     let result = sut(productState).value
 
     expect(result.productsResume[0].lowerPrice).toBe(expectedPrice)
-  });
+  })
 
   test('equals 1.75 when lastprice is 1.80 and inputing 1.75 and lowerPrice is 1.77', () => {
     let inputingPrice = 1.75    
@@ -103,8 +104,8 @@ describe('should get lower price', () => {
     let result = sut(productState).value
 
     expect(result.productsResume[0].lowerPrice).toBe(expectedPrice)
-  });
-});
+  })
+})
 
 describe('should get higher price', () => {
   test('equals 3 when lastprice is 2 and inputing 3', () => {
@@ -139,7 +140,7 @@ describe('should get higher price', () => {
     let result = sut(productState).value
 
     expect(result.productsResume[0].higherPrice).toBe(expectedPrice)
-  });
+  })
 
   test('equals 5 when lastprice is 5 and inputing 4 and higherPrice is 5', () => {
     let inputingPrice = 4
@@ -156,7 +157,7 @@ describe('should get higher price', () => {
     let result = sut(productState).value
 
     expect(result.productsResume[0].higherPrice).toBe(expectedPrice)
-  });
+  })
 
   test('equals 4 when lastprice is 2 and inputing 4 and higherPrice is 2', () => {
     let inputingPrice = 4
@@ -173,7 +174,7 @@ describe('should get higher price', () => {
     let result = sut(productState).value
 
     expect(result.productsResume[0].higherPrice).toBe(expectedPrice)
-  });
+  })
 
   test('equals 4 when lastprice is 1 and inputing 4 and higherPrice is 1.75', () => {
     let inputingPrice = 4
@@ -190,7 +191,7 @@ describe('should get higher price', () => {
     let result = sut(productState).value
 
     expect(result.productsResume[0].higherPrice).toBe(expectedPrice)
-  });
+  })
 
   test('equals 1.80 when lastprice is 1.80 and inputing 1.75 and higherPrice is 1.77', () => {
     let inputingPrice = 1.75
@@ -207,5 +208,47 @@ describe('should get higher price', () => {
     let result = sut(productState).value
 
     expect(result.productsResume[0].higherPrice).toBe(expectedPrice)
-  });
-});
+  })
+})
+
+describe('When adding a product', () => {
+  test('Then call addProduct api', () => {
+    let inputingPrice = 1.75
+    let productState = { 
+      productToSave: {price: inputingPrice, name: 'novo' },
+      productsResume: [{
+        name: 'a',
+        lastPrice: 1.80,
+        higherPrice: 1.77
+      }]
+    }    
+    let expectedPrice = 1.80
+
+    apiProduct.addProduct = jest.fn()
+
+    let result = sut(productState).value
+
+    expect(apiProduct.addProduct).toHaveBeenCalled();
+  })
+})
+
+describe('When updating a product', () => {
+  test('Then call updateProduct api', () => {
+    let inputingPrice = 1.75
+    let productState = { 
+      productToSave: {price: inputingPrice, name: 'a' },
+      productsResume: [{
+        name: 'a',
+        lastPrice: 1.80,
+        higherPrice: 1.77
+      }]
+    }    
+    let expectedPrice = 1.80
+
+    apiProduct.updateProduct = jest.fn()
+
+    let result = sut(productState).value
+
+    expect(apiProduct.updateProduct).toHaveBeenCalled();
+  })
+})

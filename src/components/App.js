@@ -31,10 +31,10 @@ class App extends Component {
 
     fetch('http://localhost:5000/api/product', {
       method: 'POST',
-      mode: "cors", 
+      //mode: "cors", 
       headers: new Headers({
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
+        'Content-Type': 'application/json'
+        //'Access-Control-Allow-Origin': '*'
       }),
       body: JSON.stringify(element)
     })
