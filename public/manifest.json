@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Preço de Produtos",
+  "name": "Saibe preço dos produtos do mercado",
   "icons": [
     {
       "src": "favicon.ico",
