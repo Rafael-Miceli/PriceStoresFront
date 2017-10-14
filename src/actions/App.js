@@ -82,12 +82,12 @@ const findHigherPricesHistory = (product, priceToUpdate) => {
 export const getProductsResume = () => dispatch => {
   console.log("Action Buscando produtos ", dispatch)
 
-  getAllProductsResume(products => {
-    console.log("resultado de produtos vindo da api ", products)    
+  return getAllProductsResume(response => {
+    console.log("resultado de produtos vindo da api ", response)        
 
     dispatch({
         type: GET_PRODUCTS_RESUME,
-        value: products
+        value: response
     })
   })
 }

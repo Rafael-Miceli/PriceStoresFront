@@ -11,7 +11,7 @@ const baseAddress= "http://localhost:53838";
 
 export const getAllProductsResume = cb => {
     console.log("Buscando produtos na base")
-    fetch(baseAddress + '/api/product')
+    return fetch(baseAddress + '/api/product')
     .then(response => {
         if(response.status !== 200) {
             console.log("Algo deu errado ", response)            

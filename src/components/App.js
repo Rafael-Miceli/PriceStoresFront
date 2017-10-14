@@ -14,17 +14,19 @@ class App extends Component {
   constructor(props) {
     super(props)
 
-    
-    // .then(productState => {
-    //   this.setState(productState)
-    // })    
-
     console.log("Indo buscar estado")
     this.state = store.getState()
     console.log("Estado inicial ", this.state)
 
     console.log("Dispacth para buscar os produtos")
+
     store.dispatch(getProductsResume())
+    .then(productState => {
+      let lastState = store.getState()
+      console.log("State dentro de dispatch de get ", lastState)      
+      this.setState(lastState)
+    })    
+    
   }
 
   saveProduct() {
