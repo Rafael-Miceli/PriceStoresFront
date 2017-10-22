@@ -70,7 +70,7 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Vamos garantir pagar o menor preço dos produtos do mercado</h2>
         </div>
-        <p className="App-intro">                    
+        <div className="App-intro">                    
           <span>Adicione produto e seu preço </span>
           <input type="text" autoFocus              
             required placeholder="Produto" 
@@ -121,7 +121,7 @@ class App extends Component {
             getTdProps={this.cellClick.bind(this)}
             filterable
           />
-        </p>
+        </div>
       </div>
     );
   }
