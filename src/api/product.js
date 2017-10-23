@@ -6,7 +6,7 @@ const defaultState = {
     productsResume: []
 }
 
-const baseAddress= "http://localhost:53838";
+const baseAddress= "http://pricestore-api.azurewebsites.net";
 
 
 export const getAllProductsResume = cb => {
