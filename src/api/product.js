@@ -6,8 +6,7 @@ const defaultState = {
     productsResume: []
 }
 
-const baseAddress= "http://pricestore-api.azurewebsites.net";
-
+const baseAddress= process.env.REACT_APP_API; //"http://pricestore-api.azurewebsites.net";
 
 export const getAllProductsResume = cb => {
     console.log("Buscando produtos na base")
