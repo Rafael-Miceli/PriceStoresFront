@@ -9,8 +9,6 @@ const defaultState = {
 }
 
 export const productReducer = (state, {type, value}) => {
-    console.log("Dentro de product reducer ", value)
-    console.log("Tipo de product reducer ", type)
 
     if(state === undefined)
         state = defaultState;
@@ -18,12 +16,8 @@ export const productReducer = (state, {type, value}) => {
     switch (type) {
         case SAVE_PRODUCT:  
             //Mudar o estado aqui
-            console.log("State atual ", state)
-            console.log("Salvando novo produto ", value)
             return {...state, newProduct: value}
         case GET_PRODUCTS_RESUME:
-            console.log("State atual ", state)
-            console.log("Buscando produtos ", value)
 
             state = value
             
