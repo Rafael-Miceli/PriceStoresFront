@@ -34,10 +34,8 @@ export const addProduct = (product, cb) => {
     console.log("Adicionando produto na base")
     fetch(baseAddress + '/api/product', {
         method: 'POST',
-        //mode: "cors", 
         headers: new Headers({
           'Content-Type': 'application/json'
-          //'Access-Control-Allow-Origin': '*'
         }),
         body: JSON.stringify(product)
     })
@@ -52,10 +50,8 @@ export const updateProduct = (product, cb) => {
     console.log("Atualizando produto na base")
     fetch(baseAddress + '/api/product', {
         method: 'PUT',
-        //mode: "cors", 
         headers: new Headers({
           'Content-Type': 'application/json'
-          //'Access-Control-Allow-Origin': '*'
         }),
         body: JSON.stringify(product)
     })
