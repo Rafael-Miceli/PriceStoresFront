@@ -15,6 +15,7 @@ export const getAllProductsResume = cb => {
         if(response.status !== 200) {
             console.log("Algo deu errado ", response)            
             cb(defaultState)
+            return;
         }
 
         response.json()
