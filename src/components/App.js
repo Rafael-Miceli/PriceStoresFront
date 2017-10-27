@@ -90,8 +90,15 @@ class App extends Component {
           {/* <input type="date" /> */}
 
           <button onClick={this.saveProduct.bind(this)}>Salvar</button>
-
-          <ReactTable
+                    
+          
+          {this.state.productsResume.map((element, index) => (
+              <div>              
+              <span>{element.name}</span>   
+              </div>
+            ))}
+                    
+          {/* <ReactTable
             data={this.state.productsResume}
             columns={[
               {
@@ -113,7 +120,7 @@ class App extends Component {
             ]}
             getTdProps={this.cellClick.bind(this)}
             filterable
-          />
+          /> */}
         </div>
       </div>
     );

@@ -40,7 +40,15 @@ export const addProduct = (product, cb) => {
         }),
         body: JSON.stringify(product)
     })
-    .then(response => console.log(response.json()))
+    .then(response => {
+        if(response.status !== 201) {
+            console.log("Algo deu errado ", response)            
+            cb(defaultState)
+            return;
+        }
+        
+        console.log(response.json())
+    })
     .catch(error => {
         console.log("Algo deu errado ", error)            
         cb(null)        
