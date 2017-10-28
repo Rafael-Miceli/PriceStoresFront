@@ -5,6 +5,7 @@ import { store } from '../stores/productStores'
 import { saveProduct, getProductsResume } from '../actions/App'
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
+import { Collection, CollectionItem } from 'react-materialize';
 
 const lastPriceColumn = "lastPrice"
 const productName = "name"
@@ -91,12 +92,25 @@ class App extends Component {
 
           <button onClick={this.saveProduct.bind(this)}>Salvar</button>
                     
-          
+          <div></div>
+
+          <Collection header='Categoria 1'>
           {this.state.productsResume.map((element, index) => (
-              <div>              
-              <span>{element.name}</span>   
-              </div>
+                            
+              <CollectionItem>{element.name}</CollectionItem>   
+              
             ))}
+          </Collection>
+
+          <Collection header='Categoria 2'>
+          {this.state.productsResume.map((element, index) => (
+                            
+              <CollectionItem>
+                {element.name}
+              </CollectionItem>   
+              
+            ))}
+          </Collection>
                     
           {/* <ReactTable
             data={this.state.productsResume}
