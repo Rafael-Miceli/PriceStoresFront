@@ -107,6 +107,9 @@ class App extends Component {
                             
               <CollectionItem>
                 {element.name}
+                <br />                
+                <span>Mn: {element.lowerPrice} </span>
+                <span>Ma: {element.higherPrice}</span>
               </CollectionItem>   
               
             ))}
