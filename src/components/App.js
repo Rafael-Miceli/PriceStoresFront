@@ -3,8 +3,6 @@ import logo from '../logo.svg'
 import '../App.css'
 import { store } from '../stores/productStores'
 import { saveProduct, getProductsResume } from '../actions/App'
-import ReactTable from 'react-table'
-import 'react-table/react-table.css'
 import { Collection, CollectionItem, Input, Row, Button } from 'react-materialize';
 
 const lastPriceColumn = "lastPrice"
@@ -39,22 +37,12 @@ class App extends Component {
     this.nameInput.focus();
   }
 
-  cellClick(state, rowInfo, column, instance) {
-    return {
-      onClick: (e, handleOriginal) => {
-        if(rowInfo === undefined)
-          return
+  cellClick(product) {
+    console.log("Produto ", product)
 
-        let productToSave = {...this.state.productToSave}
-        productToSave.name = rowInfo.row[productName]
-        productToSave.price = rowInfo.row[lastPriceColumn]
-        this.setState({productToSave})
-
-        if (handleOriginal) {
-          handleOriginal()
-        }
-      }
-    }
+    let productToSave = {...this.state.productToSave}
+    productToSave.name = product
+    this.setState({productToSave})    
   }
 
   render() {
@@ -89,23 +77,20 @@ class App extends Component {
           </Row>  
           {/* <input type="date" /> */}
 
-          <Button onClick={this.saveProduct.bind(this)}>Salvar</Button>
-                    
-          <div></div>
+          <Button onClick={this.saveProduct.bind(this)}>Salvar</Button>                    
 
-          <Collection header='Categoria 1'>
+          {/* <Collection header='Categoria 1'>
           {this.state.productsResume.map((element, index) => (
                             
               <CollectionItem>{element.name}</CollectionItem>   
               
             ))}
-          </Collection>
-
-          <Collection header='Categoria 2'>
-          {this.state.productsResume.map((element, index) => (
-                            
-              <CollectionItem>
-                {element.name}
+          </Collection> */}
+          <h3>Produtos</h3>
+          <Collection>
+          {this.state.productsResume.map((element, index) => (                            
+              <CollectionItem onClick={this.cellClick.bind(this, element.name)}>
+                <span>{element.name}</span>
                 <br />                
                 <span>Mn: {element.lowerPrice} </span>
                 <span>Ma: {element.higherPrice}</span>
@@ -113,30 +98,6 @@ class App extends Component {
               
             ))}
           </Collection>
-                    
-          {/* <ReactTable
-            data={this.state.productsResume}
-            columns={[
-              {
-                Header: "Produto",
-                accessor: "name"
-              },
-              {
-                Header: "Último preço visto",
-                accessor: "lastPrice"
-              },
-              {
-                Header: "Preço mais barato",
-                accessor: "lowerPrice"            
-              },
-              {
-                Header: "Preço mais alto",
-                accessor: "higherPrice"            
-              }
-            ]}
-            getTdProps={this.cellClick.bind(this)}
-            filterable
-          /> */}
       </div>
     );
   }
