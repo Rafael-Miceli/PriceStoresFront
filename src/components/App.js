@@ -5,7 +5,7 @@ import { store } from '../stores/productStores'
 import { saveProduct, getProductsResume } from '../actions/App'
 import ReactTable from 'react-table'
 import 'react-table/react-table.css'
-import { Collection, CollectionItem } from 'react-materialize';
+import { Collection, CollectionItem, Input, Row, Button } from 'react-materialize';
 
 const lastPriceColumn = "lastPrice"
 const productName = "name"
@@ -63,34 +63,33 @@ class App extends Component {
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Vamos garantir pagar o menor preço dos produtos do mercado</h2>
-        </div>
-        <div className="App-intro">                    
+        </div>        
           <span>Adicione produto e seu preço </span>
-          <input type="text" autoFocus              
-            required placeholder="Produto" 
-            ref={(input) => { this.nameInput = input; }}             
-            onChange={e => {
-              let productToSave = {...this.state.productToSave}
-              productToSave.name = e.target.value;
-              this.setState({productToSave})
-            }} 
-            value={this.state.productToSave.name} 
-            />
-            
-          <input type="number" 
-            step="any" 
-            required placeholder="Preço" 
-            onChange={e => {
-              let productToSave = {...this.state.productToSave}
-              productToSave.price = e.target.value;
-              this.setState({productToSave})
-            }} 
-            value={this.state.productToSave.price}
-            />
-            
+          <Row>
+            <Input s={6} autoFocus required label="Produto" 
+              ref={(input) => { this.nameInput = input; }}             
+              onChange={e => {
+                let productToSave = {...this.state.productToSave}
+                productToSave.name = e.target.value;
+                this.setState({productToSave})
+              }} 
+              value={this.state.productToSave.name} 
+              />
+              
+            <Input s={6} type="number" 
+              step="any" 
+              required label="Preço" 
+              onChange={e => {
+                let productToSave = {...this.state.productToSave}
+                productToSave.price = e.target.value;
+                this.setState({productToSave})
+              }} 
+              value={this.state.productToSave.price}
+              />
+          </Row>  
           {/* <input type="date" /> */}
 
-          <button onClick={this.saveProduct.bind(this)}>Salvar</button>
+          <Button onClick={this.saveProduct.bind(this)}>Salvar</Button>
                     
           <div></div>
 
@@ -138,7 +137,6 @@ class App extends Component {
             getTdProps={this.cellClick.bind(this)}
             filterable
           /> */}
-        </div>
       </div>
     );
   }
