@@ -1,3 +1,5 @@
+import { saveProduct, getProductsResumeSuccess } from '../actions/App'
+
 const defaultState = {
     productToSave:{
         name: '',
@@ -8,27 +10,28 @@ const defaultState = {
 
 const baseAddress= process.env.REACT_APP_API; //"http://pricestore-api.azurewebsites.net";
 
-export const getAllProductsResume = cb => {
-    console.log("Buscando produtos na base")
-    return fetch(baseAddress + '/api/product')
-    .then(response => {
-        if(response.status !== 200) {
-            console.log("Algo deu errado ", response)            
-            cb(defaultState)
-            return;
-        }
+export const getAllProductsResume = () => {    
+    return (dispatch) => {
+        console.log("Buscando produtos na base")
 
-        response.json()
-        .then(json => {            
-            console.log("json retornado ", json)
-            defaultState.productsResume = json
-            cb(defaultState);
+        fetch(baseAddress + '/api/product')
+        .then(response => {
+            if(response.status !== 200) {
+                console.log("Algo deu errado ", response)                        
+                return;
+            }
+    
+            return response            
         })
-    })
-    .catch(error => {
-        console.log("Algo deu errado ", error)            
-        cb(defaultState)        
-    })
+        .then(response => response.json())
+        .then(productsResume => {            
+            console.log("json retornado ", productsResume)
+            dispatch(getProductsResumeSuccess(productsResume))
+        })
+        .catch(error => {
+            console.log("Algo deu errado ", error)                    
+        })
+    }
 }
 
 export const addProduct = (product, cb) => {

@@ -1,4 +1,4 @@
-import { SAVE_PRODUCT, GET_PRODUCTS_RESUME } from '../constants/ActionTypes'
+import { SAVE_PRODUCT, GET_PRODUCTS_RESUME, GET_PRODUCTS_RESUME_SUCCESS } from '../constants/ActionTypes'
 import { getAllProductsResume, addProduct, updateProduct } from '../api/product'
 
 export const saveProduct = productsState => {
@@ -79,16 +79,27 @@ const findHigherPricesHistory = (product, priceToUpdate) => {
 
 
 
-export const getProductsResume = () => dispatch => {
-  console.log("Action Buscando produtos ", dispatch)
+// export const getProductsResume = () => dispatch => {
+//   console.log("Action Buscando produtos ", dispatch)
 
-  return getAllProductsResume(response => {
-    console.log("resultado de produtos vindo da api ", response)        
+//   return getAllProductsResume(response => {
+//     console.log("resultado de produtos vindo da api ", response)        
 
-    dispatch({
-        type: GET_PRODUCTS_RESUME,
-        value: response
-    })
-  })
+//     dispatch({
+//         type: GET_PRODUCTS_RESUME,
+//         value: response
+//     })
+//   })
+// }
+
+export const getProductsResume = () => {
+  return getAllProductsResume();
+}
+
+export const getProductsResumeSuccess = (productsResume) => {
+  return {
+    type: GET_PRODUCTS_RESUME_SUCCESS,
+    value: productsResume
+  }  
 }
 

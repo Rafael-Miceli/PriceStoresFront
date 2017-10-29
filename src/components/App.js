@@ -1,12 +1,10 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 import logo from '../logo.svg'
 import '../App.css'
 import { store } from '../stores/productStores'
 import { saveProduct, getProductsResume } from '../actions/App'
 import { Collection, CollectionItem, Input, Row, Button } from 'react-materialize';
-
-const lastPriceColumn = "lastPrice"
-const productName = "name"
 
 class App extends Component {
 
@@ -15,11 +13,13 @@ class App extends Component {
 
     this.state = store.getState()
 
-    store.dispatch(getProductsResume())
-    .then(productState => {
-      let lastState = store.getState()
-      this.setState(lastState)
-    })    
+    let result = store.dispatch(getProductsResume())        
+
+    console.log('Dispatch result ', result)
+  }
+
+  loadProductsResume()
+  {
     
   }
 
@@ -54,7 +54,7 @@ class App extends Component {
         </div>        
           <span>Adicione produto e seu preço </span>
           <Row>
-            <Input s={6} autoFocus required label="Produto" 
+            <Input s={6} autoFocus required placeholder="Produto" 
               ref={(input) => { this.nameInput = input; }}             
               onChange={e => {
                 let productToSave = {...this.state.productToSave}
@@ -66,7 +66,7 @@ class App extends Component {
               
             <Input s={6} type="number" 
               step="any" 
-              required label="Preço" 
+              required placeholder="Preço" 
               onChange={e => {
                 let productToSave = {...this.state.productToSave}
                 productToSave.price = e.target.value;
@@ -79,16 +79,9 @@ class App extends Component {
 
           <Button onClick={this.saveProduct.bind(this)}>Salvar</Button>                    
 
-          {/* <Collection header='Categoria 1'>
-          {this.state.productsResume.map((element, index) => (
-                            
-              <CollectionItem>{element.name}</CollectionItem>   
-              
-            ))}
-          </Collection> */}
           <h3>Produtos</h3>
           <Collection>
-          {this.state.productsResume.map((element, index) => (                            
+          {this.props.productsResume.map((element, index) => (                            
               <CollectionItem onClick={this.cellClick.bind(this, element.name)}>
                 <span>{element.name}</span>
                 <br />                
@@ -103,4 +96,21 @@ class App extends Component {
   }
 }
 
-export default App;
+App.propTypes = {
+  fetchProducts: PropTypes.func.isRequired,
+  productsResume: PropTypes.array.isRequired
+}
+
+const mapStateToProps = (state) => {
+  return {
+    productsResume: state.productsResume
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchProducts: () => dispatch(getProductsResume())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

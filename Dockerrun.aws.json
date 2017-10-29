@@ -1,7 +1,7 @@
 {
     "AWSEBDockerrunVersion": "1",
     "Image": {
-      "Name": "rafaelmiceli/pricestore-front:0.1",
+      "Name": "rafaelmiceli/pricestore-front:latest",
       "Update": "true"
     },
     "Ports": [
