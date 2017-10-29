@@ -1,4 +1,7 @@
-import { saveProduct, getProductsResumeSuccess } from '../actions/App'
+import { saveProduct, getProductsResumeSuccess } from '../actions/App'  
+import 'whatwg-fetch'
+
+console.log("fecth lib ", fetch)
 
 const defaultState = {
     productToSave:{
