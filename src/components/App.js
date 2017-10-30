@@ -80,17 +80,20 @@ class App extends Component {
           <Button onClick={this.saveProduct.bind(this)}>Salvar</Button>                    
 
           <h3>Produtos</h3>
-          <Collection>
+          
           {this.props.productsResume.map((element, index) => (                            
-              <CollectionItem onClick={this.cellClick.bind(this, element.name)}>
-                <span>{element.name}</span>
-                <br />                
-                <span>Mn: {element.lowerPrice} </span>
-                <span>Ma: {element.higherPrice}</span>
-              </CollectionItem>   
-              
-            ))}
-          </Collection>
+              <Collection header={element.categoryName}>
+                {element.products.map((product, index) => (
+                  <CollectionItem onClick={this.cellClick.bind(this, product.name)}>
+                    <span>{product.name}</span>
+                    <br />                
+                    <span>Mn: {product.lowerPrice} </span>
+                    <span>Ma: {product.higherPrice}</span>
+                  </CollectionItem>   
+                ))}
+              </Collection>    
+          ))}
+          
       </div>
     );
   }

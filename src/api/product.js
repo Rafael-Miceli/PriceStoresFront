@@ -17,7 +17,7 @@ export const getAllProductsResume = () => {
     return (dispatch) => {
         console.log("Buscando produtos na base")
 
-        fetch(baseAddress + '/api/product')
+        fetch(baseAddress + '/api/product', {mode: 'cors'})
         .then(response => {
             if(response.status !== 200) {
                 console.log("Algo deu errado ", response)                        
