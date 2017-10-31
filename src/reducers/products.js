@@ -17,17 +17,13 @@ export const productReducer = (state, {type, value}) => {
 
     switch (type) {
         case SAVE_PRODUCT:  
-            //Mudar o estado aqui
             return {...state, newProduct: value}
         case GET_PRODUCTS_RESUME:
             state = value
             
             return {...state}
-        case GET_PRODUCTS_RESUME_SUCCESS:      
-            console.log("Produtos com sucesso ", value)
-        
-            state.productsResume = value
-            
+        case GET_PRODUCTS_RESUME_SUCCESS:              
+            state.productsResume = value            
             return {...state}
         default:
             return {...state}

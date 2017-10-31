@@ -17,12 +17,7 @@ class App extends Component {
 
     console.log('Dispatch result ', result)
   }
-
-  loadProductsResume()
-  {
-    
-  }
-
+  
   saveProduct() {
     store.dispatch(saveProduct(this.state))
     this.cleanFields()

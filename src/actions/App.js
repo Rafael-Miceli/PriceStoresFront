@@ -77,21 +77,6 @@ const findHigherPricesHistory = (product, priceToUpdate) => {
   return higherPrice;
 }
 
-
-
-// export const getProductsResume = () => dispatch => {
-//   console.log("Action Buscando produtos ", dispatch)
-
-//   return getAllProductsResume(response => {
-//     console.log("resultado de produtos vindo da api ", response)        
-
-//     dispatch({
-//         type: GET_PRODUCTS_RESUME,
-//         value: response
-//     })
-//   })
-// }
-
 export const getProductsResume = () => {
   return getAllProductsResume();
 }

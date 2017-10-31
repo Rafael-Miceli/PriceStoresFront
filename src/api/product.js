@@ -1,5 +1,5 @@
 import { saveProduct, getProductsResumeSuccess } from '../actions/App'  
-import axios from 'axios'
+import 'whatwg-fetch'
 
 console.log("fecth lib ", fetch)
 
@@ -17,19 +17,16 @@ export const getAllProductsResume = () => {
     return (dispatch) => {
         console.log("Buscando produtos na base")
 
-        axios.get(baseAddress + '/api/product', {mode: 'cors'})
+        fetch(baseAddress + '/api/product')
         .then(response => {
-            
-            console.log('Response ', response)
-
             if(response.status !== 200) {
                 console.log("Algo deu errado ", response)                        
                 return;
             }
     
-            return response.data            
+            return response            
         })
-        //.then(response => response.json())
+        .then(response => response.json())
         .then(productsResume => {            
             console.log("json retornado ", productsResume)
             dispatch(getProductsResumeSuccess(productsResume))
