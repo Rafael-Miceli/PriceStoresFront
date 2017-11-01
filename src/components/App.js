@@ -14,10 +14,8 @@ class App extends Component {
     this.state = store.getState()
 
     let result = store.dispatch(getProductsResume())        
-
-    console.log('Dispatch result ', result)
   }
-  
+
   saveProduct() {
     store.dispatch(saveProduct(this.state))
     this.cleanFields()
@@ -33,8 +31,6 @@ class App extends Component {
   }
 
   cellClick(product) {
-    console.log("Produto ", product)
-
     let productToSave = {...this.state.productToSave}
     productToSave.name = product
     this.setState({productToSave})    
@@ -80,15 +76,21 @@ class App extends Component {
               <Collection header={element.categoryName}>
                 {element.products.map((product, index) => (
                   <CollectionItem onClick={this.cellClick.bind(this, product.name)}>
-                    <span>{product.name}</span>
-                    <br />                
-                    <span>Mn: {product.lowerPrice} </span>
-                    <span>Ma: {product.higherPrice}</span>
+                    
+                    <Input type='checkbox' label={product.name} />                    
+                    <span>Min: R$ {product.lowerPrice} </span>
+                    <span>Max: R$ {product.higherPrice}</span>
                   </CollectionItem>   
                 ))}
               </Collection>    
           ))}
           
+          <Button floating fab='horizontal' icon='mode_edit' className='red' large style={{bottom: '45px', right: '24px'}}>
+            <Button floating icon='insert_chart' className='red'/>
+            <Button floating icon='format_quote' className='yellow darken-1'/>
+            <Button floating icon='publish' className='green'/>
+            <Button floating icon='attach_file' className='blue'/>
+          </Button>
       </div>
     );
   }
