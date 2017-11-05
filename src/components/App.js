@@ -29,10 +29,8 @@ class App extends Component {
     productToSave.price = 0;    
     this.setState({productToSave})
 
-    console.log("NameInput Ref ", this.nameInput)
-    console.log("InputInDOM ", ReactDOM.findDOMNode(this.nameInput))
-
-    ReactDOM.findDOMNode(this.nameInput).focus()    
+    //Gambiarra porque ReactMaterialize Input não expõe focus
+    ReactDOM.findDOMNode(this.nameInput).children[0].focus()
   }
 
   cellClick(product) {
