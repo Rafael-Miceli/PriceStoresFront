@@ -5,7 +5,12 @@ const defaultState = {
         name: '',
         price: 0
     },
-    productsResume: []
+    productsResume: [
+        {
+            categoryName: 'Sem Categoria',
+            products: []
+        }        
+    ]
 }
 
 export const productReducer = (state, {type, value}) => {

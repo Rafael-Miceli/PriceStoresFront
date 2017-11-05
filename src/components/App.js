@@ -1,10 +1,12 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import logo from '../logo.svg'
 import '../App.css'
 import { store } from '../stores/productStores'
 import { saveProduct, getProductsResume } from '../actions/App'
-import { Collection, CollectionItem, Input, Row, Button } from 'react-materialize';
+import { Collection, CollectionItem, Input, Row, Button } from 'react-materialize'
 
 class App extends Component {
 
@@ -27,7 +29,10 @@ class App extends Component {
     productToSave.price = 0;    
     this.setState({productToSave})
 
-    this.nameInput.focus();
+    console.log("NameInput Ref ", this.nameInput)
+    console.log("InputInDOM ", ReactDOM.findDOMNode(this.nameInput))
+
+    ReactDOM.findDOMNode(this.nameInput).focus()    
   }
 
   cellClick(product) {
@@ -45,8 +50,8 @@ class App extends Component {
         </div>        
           <span>Adicione produto e seu preço </span>
           <Row>
-            <Input s={6} autoFocus required placeholder="Produto" 
-              ref={(input) => { this.nameInput = input; }}             
+            <Input name="inputName" label="Produto" s={6} autoFocus required placeholder="Produto" 
+              ref={myInput => this.nameInput = myInput }             
               onChange={e => {
                 let productToSave = {...this.state.productToSave}
                 productToSave.name = e.target.value;

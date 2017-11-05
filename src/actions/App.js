@@ -27,7 +27,7 @@ export const saveProduct = productsState => {
       console.log("Adding: resultado vindo da api ", response)      
     })
 
-    productsResume.push({
+    productsResume[0].products.push({
       name: productToSave.name, 
       lastPrice: productToSave.price,
       lowerPrice: productToSave.price,
