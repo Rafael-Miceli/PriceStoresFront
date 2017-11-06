@@ -7,7 +7,11 @@ export const saveProduct = productsState => {
   let productToSave = productsState.productToSave
   let productExists = false
 
-  productsResume.forEach(function(product) {
+  let products = productsResume.map(resume => resume.products).reduce((a, b) => a.concat(b))
+
+  console.log("Products Map ", products)
+
+  products.forEach(function(product) {
     if (product.name === productToSave.name ) {
       let productUpdating = {oldName: productToSave.name, newName: productToSave.name, price: productToSave.price}
       

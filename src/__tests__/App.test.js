@@ -217,9 +217,14 @@ describe('When saving a product', () => {
     let productState = { 
       productToSave: {price: inputingPrice, name: 'novo' },
       productsResume: [{
-        name: 'a',
-        lastPrice: 1.80,
-        higherPrice: 1.77
+        categoryName: "Sem Categoria",
+        products: [
+          {
+            name: 'a',
+            lastPrice: 1.80,
+            higherPrice: 1.77
+          }
+        ]        
       }]
     }    
     let expectedPrice = 1.80
@@ -236,9 +241,14 @@ describe('When saving a product', () => {
     let productState = { 
       productToSave: {price: inputingPrice, name: 'novo' },
       productsResume: [{
-        name: 'a',
-        lastPrice: 1.80,
-        higherPrice: 1.77
+        categoryName: 'Sem Categoria',
+        products: [
+          {
+            name: 'a',
+            lastPrice: 1.80,
+            higherPrice: 1.77
+          }
+        ]        
       }]
     }    
     let expectedPrice = 1.80
@@ -247,7 +257,7 @@ describe('When saving a product', () => {
 
     let result = sut(productState).value
 
-    expect(result.productsResume[1].name).toBe('novo')
+    expect(result.productsResume[0].products[1].name).toBe('novo')
   })
 
   test('It exists then call updateProduct api', () => {
@@ -255,9 +265,14 @@ describe('When saving a product', () => {
     let productState = { 
       productToSave: {price: inputingPrice, name: 'a' },
       productsResume: [{
-        name: 'a',
-        lastPrice: 1.80,
-        higherPrice: 1.77
+        categoryName: 'Sem Categoria',
+        products: [
+          {
+            name: 'a',
+            lastPrice: 1.80,
+            higherPrice: 1.77    
+          }  
+        ]        
       }]
     }    
     let expectedPrice = 1.80
@@ -274,9 +289,14 @@ describe('When saving a product', () => {
     let productState = { 
       productToSave: {price: inputingPrice, name: 'a' },
       productsResume: [{
-        name: 'a',
-        lastPrice: 1.80,
-        higherPrice: 1.77
+        categoryName: 'Sem Categoria',
+        products: [
+          {
+            name: 'a',
+            lastPrice: 1.80,
+            higherPrice: 1.77    
+          }  
+        ]        
       }]
     }    
     let expectedPrice = 1.80
