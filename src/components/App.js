@@ -48,6 +48,16 @@ class App extends Component {
         </div>        
           <span>Adicione produto e seu preço </span>
           <Row>
+          {/* <Autocomplete
+              title='Company'
+              data={
+                {
+                  'Apple': null,
+                  'Microsoft': null,
+                  'Google': 'http://placehold.it/250x250'
+                }
+              }
+            /> */}
             <Input name="inputName" label="Produto" s={6} autoFocus required placeholder="Produto" 
               ref={myInput => this.nameInput = myInput }             
               onChange={e => {
