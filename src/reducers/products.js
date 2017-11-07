@@ -10,7 +10,9 @@ const defaultState = {
             categoryName: 'Sem Categoria',
             products: []
         }        
-    ]
+    ],
+    productsName: {        
+    }    
 }
 
 export const productReducer = (state, {type, value}) => {

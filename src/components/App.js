@@ -6,7 +6,7 @@ import logo from '../logo.svg'
 import '../App.css'
 import { store } from '../stores/productStores'
 import { saveProduct, getProductsResume } from '../actions/App'
-import { Collection, CollectionItem, Input, Row, Button } from 'react-materialize'
+import { Collection, CollectionItem, Input, Row, Button, Autocomplete } from 'react-materialize'
 
 class App extends Component {
 
@@ -48,16 +48,12 @@ class App extends Component {
         </div>        
           <span>Adicione produto e seu preço </span>
           <Row>
-          {/* <Autocomplete
+            <Autocomplete
               title='Company'
               data={
-                {
-                  'Apple': null,
-                  'Microsoft': null,
-                  'Google': 'http://placehold.it/250x250'
-                }
+                this.state.productsName
               }
-            /> */}
+            />
             <Input name="inputName" label="Produto" s={6} autoFocus required placeholder="Produto" 
               ref={myInput => this.nameInput = myInput }             
               onChange={e => {

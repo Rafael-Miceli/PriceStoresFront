@@ -20,7 +20,7 @@ export const saveProduct = productsState => {
       updatePrice(product, productToSave.name, productToSave.price)
       productExists = true
     }
-  }, this);    
+  }, this)
 
   if (!productExists) {
     let productAdding = {name: productToSave.name, price: productToSave.price};
@@ -35,6 +35,8 @@ export const saveProduct = productsState => {
       lowerPrice: productToSave.price,
       higherPrice: productToSave.price
     })
+
+    productsState.productsName[productToSave.name] = null
   }  
   
   console.log("Salvando produto ", productsState)  
