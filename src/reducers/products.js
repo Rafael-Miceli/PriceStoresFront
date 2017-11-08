@@ -30,7 +30,12 @@ export const productReducer = (state, {type, value}) => {
             
             return {...state}
         case GET_PRODUCTS_RESUME_SUCCESS:              
-            state.productsResume = value            
+            state.productsResume = value  
+            value.forEach(productsResumeWithCategory => {
+                productsResumeWithCategory.products.forEach(product => {
+                    state.productsName[product.name] = null;
+                })                
+            })
             return {...state}
         default:
             return {...state}

@@ -37,6 +37,9 @@ class App extends Component {
     let productToSave = {...this.state.productToSave}
     productToSave.name = product
     this.setState({productToSave})    
+    
+    //Gambiarra porque ReactMaterialize Input não expõe focus
+    ReactDOM.findDOMNode(this.nameInput).children[0].focus()
   }
 
   render() {
@@ -49,21 +52,29 @@ class App extends Component {
           <span>Adicione produto e seu preço </span>
           <Row>
             <Autocomplete
-              title='Company'
+              s={6}
+              name="inputName"
+              title='Produto'
+              autoFocus required
+              ref={myInput => this.nameInput = myInput }
+              onChange={e => {
+
+                if (!e.target.value) return
+
+                let productToSave = {...this.state.productToSave}
+                productToSave.name = e.target.value
+                this.setState({productToSave})
+              }}
+              onAutocomplete={productName => {
+                let productToSave = {...this.state.productToSave}
+                productToSave.name = productName
+                this.setState({productToSave})
+              }} 
+              value={this.state.productToSave.name}
               data={
                 this.state.productsName
               }
-            />
-            <Input name="inputName" label="Produto" s={6} autoFocus required placeholder="Produto" 
-              ref={myInput => this.nameInput = myInput }             
-              onChange={e => {
-                let productToSave = {...this.state.productToSave}
-                productToSave.name = e.target.value;
-                this.setState({productToSave})
-              }} 
-              value={this.state.productToSave.name} 
-              />
-              
+            />              
             <Input s={6} type="number" 
               step="any" 
               required placeholder="Preço" 
