@@ -1,5 +1,6 @@
 import { saveProduct, getProductsResumeSuccess } from '../actions/App'  
 import 'whatwg-fetch'
+import localforage from 'localforage'
 
 console.log("fecth lib ", fetch)
 
@@ -33,6 +34,12 @@ export const getAllProductsResume = () => {
         })
         .catch(error => {
             console.log("Algo deu errado ", error)                    
+            console.log("Buscando do cache ")            
+            localforage.getItem('productsResume').then(result => {
+                console.log(result)
+                dispatch(getProductsResumeSuccess(result))
+                return result
+            })
         })
     }
 }

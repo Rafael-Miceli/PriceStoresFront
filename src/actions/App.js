@@ -1,5 +1,6 @@
 import { SAVE_PRODUCT, GET_PRODUCTS_RESUME, GET_PRODUCTS_RESUME_SUCCESS } from '../constants/ActionTypes'
 import { getAllProductsResume, addProduct, updateProduct } from '../api/product'
+import localforage from 'localforage'
 
 export const saveProduct = productsState => {
 
@@ -38,6 +39,15 @@ export const saveProduct = productsState => {
 
     productsState.productsName[productToSave.name] = null
   }  
+
+  console.log("localForage ", localforage)
+
+  localforage.setItem('productsResume', productsResume).then(() => {    
+    }).then(value => {
+      console.log("Adicionado ao local cache ", value)
+    }).catch(err => {
+      console.log("Erro ao adicionar em local cache ", err)
+    })
   
   console.log("Salvando produto ", productsState)  
 
