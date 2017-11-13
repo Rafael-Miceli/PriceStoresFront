@@ -31,6 +31,7 @@ class App extends Component {
 
     //Gambiarra porque ReactMaterialize Input não expõe focus
     ReactDOM.findDOMNode(this.nameInput).children[0].focus()
+    ReactDOM.findDOMNode(this.filterInput).children[0].focus()
   }
 
   cellClick(product) {
@@ -91,7 +92,28 @@ class App extends Component {
           <Button onClick={this.saveProduct.bind(this)}>Salvar</Button>                    
 
           <h3>Produtos</h3>
-          
+
+          <Row>
+            <Autocomplete
+                s={12}
+                name="inputFilter"
+                title='Filtrar Produto'
+                autoFocus required
+                ref={myInput => this.filterInput = myInput }
+                onChange={e => {
+                  if (!e.target.value) return
+
+                  
+                }}
+                onAutocomplete={productName => {
+                  
+                }} 
+                data={
+                  this.state.productsName
+                }
+              />
+          </Row>
+
           {this.props.productsResume.map((element, index) => (                            
               <Collection header={element.categoryName}>
                 {element.products.map((product, index) => (

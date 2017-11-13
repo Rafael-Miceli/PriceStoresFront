@@ -33,8 +33,8 @@ export const getAllProductsResume = () => {
             dispatch(getProductsResumeSuccess(productsResume))
         })
         .catch(error => {
-            console.log("Algo deu errado ", error)                    
-            console.log("Buscando do cache ")            
+            console.log("Algo deu errado ", error)
+            console.log("Buscando do cache ")
             localforage.getItem('productsResume').then(result => {
                 console.log(result)
                 dispatch(getProductsResumeSuccess(result))
