@@ -103,7 +103,13 @@ class App extends Component {
                 onChange={e => {
                   if (!e.target.value) return
 
-                  
+                  this.setState({productsResumeTableFilter: this.props.productsResume})
+                  console.log(this.props.productsResumeTableFilter)
+                  let filterResult = this.props.productsResumeTableFilter
+                  let productsResult = this.props.productsResumeTableFilter[0].products.filter(p => p.name.includes(e.target.value))
+                  filterResult[0].products = productsResult
+                  console.log("Filtrando ", filterResult)
+                  this.setState({productsResumeTableFilter: filterResult})
                 }}
                 onAutocomplete={productName => {
                   
@@ -114,7 +120,7 @@ class App extends Component {
               />
           </Row>
 
-          {this.props.productsResumeTableFilter.map((element, index) => (                            
+          {this.state.productsResumeTableFilter.map((element, index) => (                            
               <Collection header={element.categoryName}>
                 {element.products.map((product, index) => (
                   <CollectionItem onClick={this.cellClick.bind(this, product.name)}>
