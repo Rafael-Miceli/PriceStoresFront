@@ -114,7 +114,7 @@ class App extends Component {
               />
           </Row>
 
-          {this.props.productsResume.map((element, index) => (                            
+          {this.props.productsResumeTableFilter.map((element, index) => (                            
               <Collection header={element.categoryName}>
                 {element.products.map((product, index) => (
                   <CollectionItem onClick={this.cellClick.bind(this, product.name)}>
@@ -143,7 +143,8 @@ App.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    productsResume: state.productsResume
+    productsResume: state.productsResume,
+    productsResumeTableFilter: state.productsResumeTableFilter
   }
 }
 

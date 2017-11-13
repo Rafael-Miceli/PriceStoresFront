@@ -12,6 +12,12 @@ const defaultState = {
             products: []
         }        
     ],
+    productsResumeTableFilter: [
+        {
+            categoryName: 'Sem Categoria',
+            products: []
+        }        
+    ],
     productsName: {        
     }    
 }
@@ -31,6 +37,7 @@ export const productReducer = (state, {type, value}) => {
             return {...state}
         case GET_PRODUCTS_RESUME_SUCCESS:              
             state.productsResume = value  
+            state.productsResumeTableFilter = value  
 
             //Para o AutoComplete
             value.forEach(productsResumeWithCategory => {
