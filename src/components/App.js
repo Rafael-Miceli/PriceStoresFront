@@ -123,7 +123,7 @@ class App extends Component {
           {this.state.productsResumeTableFilter.map((element, index) => (                            
               <Collection header={element.categoryName}>
                 {element.products.map((product, index) => (
-                  <CollectionItem onClick={this.cellClick.bind(this, product.name)}>
+                  <CollectionItem onClick={this.cellClick.bind(this, product.name)} style={{textAlign: 'left'}}>
                     
                     <Input type='checkbox' label={product.name} />                    
                     <span>Min: R$ {product.lowerPrice} </span>
