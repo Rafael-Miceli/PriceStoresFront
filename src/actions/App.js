@@ -37,6 +37,10 @@ export const saveProduct = productsState => {
       higherPrice: productToSave.price
     })
 
+    console.log("Fazendo Sort ", productsResume[0].products)
+    productsResume[0].products.sort(productsComparer)
+    console.log("Sorted ", productsResume[0].products)
+    
     productsState.productsName[productToSave.name] = null
   }  
 
@@ -100,5 +104,16 @@ export const getProductsResumeSuccess = (productsResume) => {
     type: GET_PRODUCTS_RESUME_SUCCESS,
     value: productsResume
   }  
+}
+
+const productsComparer = (a, b) => {
+  if (a.name > b.name) {
+    return 1;
+  }
+  if (a.name < b.name) {
+    return -1;
+  }
+  // a deve ser igual a b
+  return 0;
 }
 
