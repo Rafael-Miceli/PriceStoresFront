@@ -103,16 +103,24 @@ class App extends Component {
                 onChange={e => {
                   if (!e.target.value) return
 
-                  this.setState({productsResumeTableFilter: this.props.productsResume})
-                  console.log(this.props.productsResumeTableFilter)
-                  let filterResult = this.props.productsResumeTableFilter
-                  let productsResult = this.props.productsResumeTableFilter[0].products.filter(p => p.name.includes(e.target.value))
-                  filterResult[0].products = productsResult
-                  console.log("Filtrando ", filterResult)
-                  this.setState({productsResumeTableFilter: filterResult})
-                }}
-                onAutocomplete={productName => {
-                  
+                  console.log("Filtro Begin ", this.state.productsResume)
+
+                  var filteredList = this.state.productsResumeTableFilter.slice()
+
+                  console.log(filteredList)
+
+                  var filteredListProducts = filteredList[0].products.slice()
+                  filteredListProducts = filteredListProducts.filter(p => {
+                    if (p.name.includes(e.target.value))
+                      return p
+                  })
+
+                  console.log(filteredList)
+                  console.log(filteredListProducts)
+
+                  filteredList[0].products = filteredListProducts
+
+                  //this.setState({productsResumeTableFilter: filteredList})
                 }} 
                 data={
                   this.state.productsName
@@ -144,7 +152,8 @@ class App extends Component {
 
 App.propTypes = {
   fetchProducts: PropTypes.func.isRequired,
-  productsResume: PropTypes.array.isRequired
+  productsResume: PropTypes.array.isRequired,
+  productsResumeTableFilter: PropTypes.array.isRequired
 }
 
 const mapStateToProps = (state) => {

@@ -37,9 +37,7 @@ export const saveProduct = productsState => {
       higherPrice: productToSave.price
     })
 
-    console.log("Fazendo Sort ", productsResume[0].products)
     productsResume[0].products.sort(productsComparer)
-    console.log("Sorted ", productsResume[0].products)
     
     productsState.productsName[productToSave.name] = null
   }  

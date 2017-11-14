@@ -33,14 +33,18 @@ export const productReducer = (state, {type, value}) => {
         case SAVE_PRODUCT:  
             return {...state, newProduct: value}
         case GET_PRODUCTS_RESUME:
-            state = value            
+            state = value
             return {...state}
-        case GET_PRODUCTS_RESUME_SUCCESS:              
-            state.productsResume = value  
-            state.productsResumeTableFilter = value  
+        case GET_PRODUCTS_RESUME_SUCCESS:               
+
+            state.productsResume = value.slice()
+            state.productsResumeTableFilter = value.slice()
 
             //Para o AutoComplete
-            value.forEach(productsResumeWithCategory => {
+            value.forEach((productsResumeWithCategory, i) => {
+                state.productsResume[i].products = productsResumeWithCategory.products.slice()
+                state.productsResumeTableFilter[i].products = productsResumeWithCategory.products.slice()
+                
                 productsResumeWithCategory.products.forEach(product => {
                     state.productsName[product.name] = null;
                 })                
