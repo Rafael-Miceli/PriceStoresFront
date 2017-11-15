@@ -22,6 +22,17 @@ class App extends Component {
     store.dispatch(saveProduct(this.state))
     this.cleanFields()
   }
+
+  filterProductBy(value) {
+    var filteredList = this.state.productsResume.slice()
+    
+    filteredList = filteredList.filter(p => {
+      if (p.name.toLowerCase().includes(value.toLowerCase()))
+        return p
+    })
+
+    this.setState({productsResumeTableFilter: filteredList})
+  }
   
   cleanFields() {    
     let productToSave = {...this.state.productToSave}
@@ -103,40 +114,36 @@ class App extends Component {
                 onChange={e => {
                   if (!e.target.value) return
 
-                  console.log("Filtro Begin ", this.state.productsResume)
-
-                  // var filteredList = this.state.productsResumeTableFilter.slice()
-
-                  // console.log(filteredList)
-
-                  // var filteredListProducts = filteredList[0].products.slice()
-                  // filteredListProducts = filteredListProducts.filter(p => {
-                  //   if (p.name.includes(e.target.value))
-                  //     return p
-                  // })
-
-                  // console.log(filteredList)
-                  // console.log(filteredListProducts)
-
-                  // filteredList[0].products = filteredListProducts
-
-                  //this.setState({productsResumeTableFilter: filteredList})
-                }} 
+                  this.filterProductBy(e.target.value)
+                }}
+                onAutocomplete={productName => {
+                  this.filterProductBy(productName)
+                }}  
                 data={
                   this.state.productsName
                 }
               />
           </Row>
 
-          {this.state.productsResumeTableFilter.map((product, index) => (                            
-              <Collection header={product.categoryName}>
-                  <CollectionItem onClick={this.cellClick.bind(this, product.name)} style={{textAlign: 'left'}}>                    
-                    <Input type='checkbox' label={product.name} />                    
-                    <span>Min: R$ {product.lowerPrice} </span>
-                    <span>Max: R$ {product.higherPrice}</span>
-                  </CollectionItem>                   
+          {this.state.productsResumeTableFilter.map((productCategory, indexCategory) => {  
+            if (indexCategory > 0 && productCategory.categoryName === this.state.productsResumeTableFilter[(indexCategory - 1)].categoryName)
+              return (null)
+
+            return ( 
+              <Collection header={productCategory.categoryName}>
+                  {this.state.productsResumeTableFilter.map((product, index) => {  
+                    if (product.categoryName === productCategory.categoryName)
+                      return ( 
+                          <CollectionItem onClick={this.cellClick.bind(this, product.name)} style={{textAlign: 'left'}}>                    
+                            <Input type='checkbox' label={product.name} />                    
+                            <span>Min: R$ {product.lowerPrice} </span>
+                            <span>Max: R$ {product.higherPrice}</span>
+                          </CollectionItem>                                         
+                      )
+                  })}
               </Collection>    
-          ))}
+            )
+          })}            
           
           <Button floating fab='horizontal' icon='mode_edit' className='red' large style={{bottom: '45px', right: '24px'}}>
             <Button floating icon='shopping_cart' className='blue'/>
