@@ -37,8 +37,6 @@ export const saveProduct = productsState => {
     })
 
     productsResume.sort(productsComparer)
-    
-    console.log("!!! ", productsState)
 
     productsState.productsName[productToSave.name] = null
   }  

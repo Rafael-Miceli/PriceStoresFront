@@ -19,113 +19,84 @@ describe('should get lower price', () => {
     let inputingPrice = 3    
     let productState = { 
       productToSave: {price: inputingPrice, name: 'a' },
-      productsResume: [createProductObject('a', 2, 2, 2)]
+      productsResume: [createProductObject('a', 2, 2, 2)],
+      productsName: []
     }
     
     let expectedPrice = 2
     let result = sut(productState).value
 
-    expect(result.productsResume[0].products[0].lowerPrice).toBe(expectedPrice)
+    expect(result.productsResume[0].lowerPrice).toBe(expectedPrice)
   })
 
   test('equals 2 when lastprice is 3, lowestprice is 3 and inputing 2', () => {
     let inputingPrice = 2    
     let productState = { 
       productToSave: {price: inputingPrice, name: 'a' },
-      productsResume: [{
-        categoryName: 'Sem categoria',
-        products: [{
-          name: 'a',
-          lastPrice: 3,
-          lowerPrice: 3
-        }]        
-      }]
+      productsResume: [createProductObject('a', 3, 3, 3) ],
+      productsName: []
     }
     
     let expectedPrice = 2
     let result = sut(productState).value
 
-    expect(result.productsResume[0].products[0].lowerPrice).toBe(expectedPrice)
+    expect(result.productsResume[0].lowerPrice).toBe(expectedPrice)
   })
 
   test('equals 2 when lastprice is 5 and inputing 4 and lowerPrice is 2', () => {
     let inputingPrice = 4    
     let productState = { 
       productToSave: {price: inputingPrice, name: 'a' },
-      productsResume: [{
-        categoryName: 'Sem categoria',
-        products: [{
-          name: 'a',
-          lastPrice: 5,
-          lowerPrice: 2
-        }]        
-      }]
+      productsResume: [createProductObject('a', 5, 2, 5) ],
+      productsName: []
     }
     
     let expectedPrice = 2
     let result = sut(productState).value
 
-    expect(result.productsResume[0].products[0].lowerPrice).toBe(expectedPrice)
+    expect(result.productsResume[0].lowerPrice).toBe(expectedPrice)
   })
 
   test('equals 2 when lastprice is 2 and inputing 4 and lowerPrice is 2', () => {
     let inputingPrice = 4    
     let productState = { 
       productToSave: {price: inputingPrice, name: 'a' },
-      productsResume: [{
-        categoryName: 'Sem categoria',
-        products: [{
-          name: 'a',
-          lastPrice: 5,
-          lowerPrice: 2
-        }]        
-      }]
+      productsResume: [createProductObject('a', 5, 2, 5) ],
+      productsName: []
     }
     
     let expectedPrice = 2
     let result = sut(productState).value
 
-    expect(result.productsResume[0].products[0].lowerPrice).toBe(expectedPrice)
+    expect(result.productsResume[0].lowerPrice).toBe(expectedPrice)
   })
 
   test('equals 1.75 when lastprice is 2 and inputing 4 and lowerPrice is 1.75', () => {
     let inputingPrice = 4    
     let productState = { 
       productToSave: {price: inputingPrice, name: 'a' },
-      productsResume: [{
-        categoryName: 'Sem categoria',
-        products: [{
-          name: 'a',
-          lastPrice: 2,
-          lowerPrice: 1.75
-        }]        
-      }]
+      productsResume: [createProductObject('a', 2, 1.75, 2) ],
+      productsName: []
     }
     
     let expectedPrice = 1.75
     let result = sut(productState).value
 
-    expect(result.productsResume[0].products[0].lowerPrice).toBe(expectedPrice)
+    expect(result.productsResume[0].lowerPrice).toBe(expectedPrice)
   })
 
   test('equals 1.75 when lastprice is 1.80 and inputing 1.75 and lowerPrice is 1.77', () => {
     let inputingPrice = 1.75    
     let productState = { 
       productToSave: {price: inputingPrice, name: 'a' },
-      productsResume: [{
-        categoryName: 'Sem categoria',
-        products: [{
-          name: 'a',
-          lastPrice: 1.80,
-          lowerPrice: 1.77
-        }]        
-      }]
+      productsResume: [createProductObject('a', 1.80, 1.77, 1.80) ],
+      productsName: []
     }
     
     let expectedPrice = 1.75
     let result = sut(productState).value
 
-    expect(result.productsResume[0].products[0].lowerPrice).toBe(expectedPrice)
+    expect(result.productsResume[0].lowerPrice).toBe(expectedPrice)
   })
 })
 
@@ -134,120 +105,84 @@ describe('should get higher price', () => {
     let inputingPrice = 3    
     let productState = { 
       productToSave: {price: inputingPrice, name: 'a' },
-      productsResume: [{
-        categoryName: 'Sem categoria',
-        products: [{
-          name: 'a',
-          lastPrice: 2,
-          higherPrice: 2
-        }]        
-      }]
+      productsResume: [createProductObject('a', 2, 1.50, 2) ],
+      productsName: []
     }
     
     let expectedPrice = 3
     let result = sut(productState).value
 
-    expect(result.productsResume[0].products[0].higherPrice).toBe(expectedPrice)
+    expect(result.productsResume[0].higherPrice).toBe(expectedPrice)
   });
 
   test('equals 3 when lastprice is 3 and inputing 2', () => {
     let inputingPrice = 2    
     let productState = { 
       productToSave: {price: inputingPrice, name: 'a' },
-      productsResume: [{
-        categoryName: 'Sem categoria',
-        products: [{
-          name: 'a',
-          lastPrice: 3,
-          higherPrice: 2
-        }]        
-      }]
+      productsResume: [createProductObject('a', 3, 1.50, 2) ],
+      productsName: []
     }
     
     let expectedPrice = 3
     let result = sut(productState).value
 
-    expect(result.productsResume[0].products[0].higherPrice).toBe(expectedPrice)
+    expect(result.productsResume[0].higherPrice).toBe(expectedPrice)
   })
 
   test('equals 5 when lastprice is 5 and inputing 4 and higherPrice is 5', () => {
     let inputingPrice = 4
     let productState = { 
       productToSave: {price: inputingPrice, name: 'a' },
-      productsResume: [{
-        categoryName: 'Sem categoria',
-        products: [{
-          name: 'a',
-          lastPrice: 5,
-          higherPrice: 5
-        }]        
-      }]
+      productsResume: [createProductObject('a', 5, 1.50, 5) ],
+      productsName: []
     }
     
     let expectedPrice = 5
     let result = sut(productState).value
 
-    expect(result.productsResume[0].products[0].higherPrice).toBe(expectedPrice)
+    expect(result.productsResume[0].higherPrice).toBe(expectedPrice)
   })
 
   test('equals 4 when lastprice is 2 and inputing 4 and higherPrice is 2', () => {
     let inputingPrice = 4
     let productState = { 
       productToSave: {price: inputingPrice, name: 'a' },
-      productsResume: [{
-        categoryName: 'Sem categoria',
-        products: [{
-          name: 'a',
-          lastPrice: 2,
-          higherPrice: 2
-        }]        
-      }]
+      productsResume: [createProductObject('a', 2, 1.50, 2) ],
+      productsName: []
     }
     
     let expectedPrice = 4
     let result = sut(productState).value
 
-    expect(result.productsResume[0].products[0].higherPrice).toBe(expectedPrice)
+    expect(result.productsResume[0].higherPrice).toBe(expectedPrice)
   })
 
   test('equals 4 when lastprice is 1 and inputing 4 and higherPrice is 1.75', () => {
     let inputingPrice = 4
     let productState = { 
       productToSave: {price: inputingPrice, name: 'a' },
-      productsResume: [{
-        categoryName: 'Sem categoria',
-        products: [{
-          name: 'a',
-          lastPrice: 1,
-          higherPrice: 1.75
-        }]        
-      }]
+      productsResume: [createProductObject('a', 1, 1, 1.75) ],
+      productsName: []
     }
     
     let expectedPrice = 4
     let result = sut(productState).value
 
-    expect(result.productsResume[0].products[0].higherPrice).toBe(expectedPrice)
+    expect(result.productsResume[0].higherPrice).toBe(expectedPrice)
   })
 
   test('equals 1.80 when lastprice is 1.80 and inputing 1.75 and higherPrice is 1.77', () => {
     let inputingPrice = 1.75
     let productState = { 
       productToSave: {price: inputingPrice, name: 'a' },
-      productsResume: [{
-        categoryName: 'Sem categoria',
-        products: [{
-          name: 'a',
-          lastPrice: 1.80,
-          higherPrice: 1.77
-        }]        
-      }]
+      productsResume: [createProductObject('a', 1.80, 1.50, 1.80) ],
+      productsName: []
     }
     
     let expectedPrice = 1.80
     let result = sut(productState).value
 
-    expect(result.productsResume[0].products[0].higherPrice).toBe(expectedPrice)
+    expect(result.productsResume[0].higherPrice).toBe(expectedPrice)
   })
 })
 
@@ -256,16 +191,8 @@ describe('When saving a product', () => {
     let inputingPrice = 1.75
     let productState = { 
       productToSave: {price: inputingPrice, name: 'novo' },
-      productsResume: [{
-        categoryName: "Sem Categoria",
-        products: [
-          {
-            name: 'a',
-            lastPrice: 1.80,
-            higherPrice: 1.77
-          }
-        ]        
-      }]
+      productsResume: [ createProductObject('a', 1.80, 1.50, 1.80) ],
+      productsName: []
     }    
     let expectedPrice = 1.80
 
