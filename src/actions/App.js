@@ -8,9 +8,7 @@ export const saveProduct = productsState => {
   let productToSave = productsState.productToSave
   let productExists = false
 
-  let products = productsResume.map(resume => resume.products).reduce((a, b) => a.concat(b))
-
-  products.forEach(function(product) {
+  productsResume.forEach(function(product) {
     if (product.name === productToSave.name ) {
       let productUpdating = {oldName: productToSave.name, newName: productToSave.name, price: productToSave.price}
       
@@ -30,15 +28,18 @@ export const saveProduct = productsState => {
       console.log("Adding: resultado vindo da api ", response)      
     })
 
-    productsResume[0].products.push({
+    productsResume.push({
       name: productToSave.name, 
       lastPrice: productToSave.price,
       lowerPrice: productToSave.price,
-      higherPrice: productToSave.price
+      higherPrice: productToSave.price,
+      categoryName: "Sem Categoria"
     })
 
-    productsResume[0].products.sort(productsComparer)
+    productsResume.sort(productsComparer)
     
+    console.log("!!! ", productsState)
+
     productsState.productsName[productToSave.name] = null
   }  
 

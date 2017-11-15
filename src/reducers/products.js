@@ -6,20 +6,9 @@ const defaultState = {
         name: '',
         price: 0
     },
-    productsResume: [
-        {
-            categoryName: 'Sem Categoria',
-            products: []
-        }        
-    ],
-    productsResumeTableFilter: [
-        {
-            categoryName: 'Sem Categoria',
-            products: []
-        }        
-    ],
-    productsName: {        
-    }    
+    productsResume: [],
+    productsResumeTableFilter: [],
+    productsName: {}    
 }
 
 export const productReducer = (state, {type, value}) => {
@@ -41,13 +30,8 @@ export const productReducer = (state, {type, value}) => {
             state.productsResumeTableFilter = value.slice()
 
             //Para o AutoComplete
-            value.forEach((productsResumeWithCategory, i) => {
-                state.productsResume[i].products = productsResumeWithCategory.products.slice()
-                state.productsResumeTableFilter[i].products = productsResumeWithCategory.products.slice()
-                
-                productsResumeWithCategory.products.forEach(product => {
+            value.forEach((product, i) => {
                     state.productsName[product.name] = null;
-                })                
             })
 
             localforage.setItem('productsResume', state.productsResume).then(() => {

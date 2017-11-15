@@ -105,20 +105,20 @@ class App extends Component {
 
                   console.log("Filtro Begin ", this.state.productsResume)
 
-                  var filteredList = this.state.productsResumeTableFilter.slice()
+                  // var filteredList = this.state.productsResumeTableFilter.slice()
 
-                  console.log(filteredList)
+                  // console.log(filteredList)
 
-                  var filteredListProducts = filteredList[0].products.slice()
-                  filteredListProducts = filteredListProducts.filter(p => {
-                    if (p.name.includes(e.target.value))
-                      return p
-                  })
+                  // var filteredListProducts = filteredList[0].products.slice()
+                  // filteredListProducts = filteredListProducts.filter(p => {
+                  //   if (p.name.includes(e.target.value))
+                  //     return p
+                  // })
 
-                  console.log(filteredList)
-                  console.log(filteredListProducts)
+                  // console.log(filteredList)
+                  // console.log(filteredListProducts)
 
-                  filteredList[0].products = filteredListProducts
+                  // filteredList[0].products = filteredListProducts
 
                   //this.setState({productsResumeTableFilter: filteredList})
                 }} 
@@ -128,16 +128,13 @@ class App extends Component {
               />
           </Row>
 
-          {this.state.productsResumeTableFilter.map((element, index) => (                            
-              <Collection header={element.categoryName}>
-                {element.products.map((product, index) => (
-                  <CollectionItem onClick={this.cellClick.bind(this, product.name)} style={{textAlign: 'left'}}>
-                    
+          {this.state.productsResumeTableFilter.map((product, index) => (                            
+              <Collection header={product.categoryName}>
+                  <CollectionItem onClick={this.cellClick.bind(this, product.name)} style={{textAlign: 'left'}}>                    
                     <Input type='checkbox' label={product.name} />                    
                     <span>Min: R$ {product.lowerPrice} </span>
                     <span>Max: R$ {product.higherPrice}</span>
-                  </CollectionItem>   
-                ))}
+                  </CollectionItem>                   
               </Collection>    
           ))}
           

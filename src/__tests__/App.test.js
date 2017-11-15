@@ -3,19 +3,23 @@ import ReactDOM from 'react-dom';
 import { saveProduct as sut } from '../actions/App';
 import  * as apiProduct from '../api/product';
 
+
+const createProductObject = (name, lastPrice, lowerPrice, higherPrice) => {
+  return {    
+    name: name,
+    lastPrice: lastPrice,
+    lowerPrice: lowerPrice,
+    higherPrice: higherPrice,
+    categoryName: 'Sem categoria'            
+  }
+}
+
 describe('should get lower price', () => {
   test('equals 2 when lastprice is 2, lowestprice is 2, and inputing 3', () => {
     let inputingPrice = 3    
     let productState = { 
       productToSave: {price: inputingPrice, name: 'a' },
-      productsResume: [{
-        categoryName: 'Sem categoria',
-        products: [{
-          name: 'a',
-          lastPrice: 2,
-          lowerPrice: 2
-        }]        
-      }]
+      productsResume: [createProductObject('a', 2, 2, 2)]
     }
     
     let expectedPrice = 2
@@ -276,40 +280,24 @@ describe('When saving a product', () => {
     let inputingPrice = 1.75
     let productState = { 
       productToSave: {price: inputingPrice, name: 'novo' },
-      productsResume: [{
-        categoryName: 'Sem Categoria',
-        products: [
-          {
-            name: 'a',
-            lastPrice: 1.80,
-            higherPrice: 1.77
-          }
-        ]        
-      }]
+      productsResume: [ createProductObject('a', 1.80, 1.50, 1.80) ],
+      productsName: []
     }    
+    
     let expectedPrice = 1.80
 
     apiProduct.addProduct = jest.fn()
 
     let result = sut(productState).value
 
-    expect(result.productsResume[0].products[1].name).toBe('novo')
+    expect(result.productsResume[1].name).toBe('novo')
   })
 
   test('It exists then call updateProduct api', () => {
     let inputingPrice = 1.75
     let productState = { 
       productToSave: {price: inputingPrice, name: 'a' },
-      productsResume: [{
-        categoryName: 'Sem Categoria',
-        products: [
-          {
-            name: 'a',
-            lastPrice: 1.80,
-            higherPrice: 1.77    
-          }  
-        ]        
-      }]
+      productsResume: [ createProductObject('a', 1.80, 1.50, 1.80) ]
     }    
     let expectedPrice = 1.80
 
@@ -324,17 +312,9 @@ describe('When saving a product', () => {
     let inputingPrice = 1.75
     let productState = { 
       productToSave: {price: inputingPrice, name: 'a' },
-      productsResume: [{
-        categoryName: 'Sem Categoria',
-        products: [
-          {
-            name: 'a',
-            lastPrice: 1.80,
-            higherPrice: 1.77    
-          }  
-        ]        
-      }]
+      productsResume: [ createProductObject('a', 1.80, 1.50, 1.80) ]
     }    
+
     let expectedPrice = 1.80
 
     apiProduct.updateProduct = jest.fn()
