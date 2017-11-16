@@ -51,7 +51,7 @@ class App extends Component {
     this.setState({productToSave})    
     
     //Gambiarra porque ReactMaterialize Input não expõe focus
-    ReactDOM.findDOMNode(this.nameInput).children[0].focus()
+    //ReactDOM.findDOMNode(this.nameInput).children[0].focus()
   }
 
   render() {
@@ -112,7 +112,7 @@ class App extends Component {
                 autoFocus required
                 ref={myInput => this.filterInput = myInput }
                 onChange={e => {
-                  if (!e.target.value) return
+                  if (e.target.value === undefined) return
 
                   this.filterProductBy(e.target.value)
                 }}
@@ -132,10 +132,21 @@ class App extends Component {
             return ( 
               <Collection header={productCategory.categoryName}>
                   {this.state.productsResumeTableFilter.map((product, index) => {  
+                    if(!product.checked)
+                      product.checked = false
+                      
                     if (product.categoryName === productCategory.categoryName)
                       return ( 
                           <CollectionItem onClick={this.cellClick.bind(this, product.name)} style={{textAlign: 'left'}}>                    
-                            <Input type='checkbox' label={product.name} />                    
+                            <Input className='filled-in' type='checkbox' checked={product.checked} label={product.name} 
+                              onChange={() => {
+                                
+                                let productsResume = this.state.productsResume.slice()
+                                let productChecked = productsResume.find(pr => pr.name === product.name)
+                                productChecked.checked = !product.checked
+                                
+                                this.setState({productsResume})
+                              }} />                    
                             <span>Min: R$ {product.lowerPrice} </span>
                             <span>Max: R$ {product.higherPrice}</span>
                           </CollectionItem>                                         
