@@ -7,6 +7,7 @@ import '../App.css'
 import { store } from '../stores/productStores'
 import { saveProduct, getProductsResume } from '../actions/App'
 import { Collection, CollectionItem, Input, Row, Button, Autocomplete } from 'react-materialize'
+import Modal from 'react-modal'
 
 class App extends Component {
 
@@ -155,10 +156,26 @@ class App extends Component {
               </Collection>    
             )
           })}            
-          
-          <Button floating fab='horizontal' icon='mode_edit' className='red' large style={{bottom: '45px', right: '24px'}}>
-            <Button floating icon='shopping_cart' className='blue'/>
-            {/* <Button floating icon='local_dining' className='green'/> */}
+
+          <Modal
+            isOpen={this.state.modalIsOpen}
+            style={customStyles}
+            contentLabel="Example Modal"
+          >
+
+            <h5>Quer mesmo remover os produtos selecionados?</h5>
+            <div></div>
+            <Button className='blue' onClick={() => this.setState({modalIsOpen: false})}>Não</Button>
+            <Button className='red' style={{float: 'right'}} >Sim</Button>         
+            
+          </Modal>
+            
+          <Button floating fab='horizontal' icon='mode_edit' className='blue' large style={{bottom: '45px', right: '24px'}}>
+            <Button floating icon='shopping_cart' className='green' />
+            <Button floating icon='delete_forever' className='red' onClick={() => {
+              console.log("Preparando para deletar todos checkeds mostrar modal")
+              this.setState({modalIsOpen: true})
+            }}/>
           </Button>
       </div>
     );
@@ -181,6 +198,17 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchProducts: () => dispatch(getProductsResume())
+  }
+}
+
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
   }
 }
 

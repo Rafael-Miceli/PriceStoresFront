@@ -8,7 +8,8 @@ const defaultState = {
     },
     productsResume: [],
     productsResumeTableFilter: [],
-    productsName: {}    
+    productsName: {},
+    modalIsOpen: false
 }
 
 export const productReducer = (state, {type, value}) => {
