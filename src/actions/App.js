@@ -2,6 +2,7 @@ import { SAVE_PRODUCT, GET_PRODUCTS_RESUME, GET_PRODUCTS_RESUME_SUCCESS } from '
 import { getAllProductsResume, addProduct, updateProduct } from '../api/product'
 import localforage from 'localforage'
 
+
 export const saveProduct = productsState => {
 
   let productsResume = productsState.productsResume
@@ -101,6 +102,24 @@ export const getProductsResumeSuccess = (productsResume) => {
     type: GET_PRODUCTS_RESUME_SUCCESS,
     value: productsResume
   }  
+}
+
+export const removeProducts = productsState => {
+  let productsResume = productsState.productsResume
+  let productsToRemove = productsState.productsResume.filter(p => p.checked)
+
+  console.log('produtos a remover ', productsToRemove)
+
+  //Chamar API para remover os produtos
+
+  productsState.productsResume = productsResume.filter(p => !p.checked)
+
+  console.log('Estado de produtos removidos ', productsState)
+
+  return {
+    type: 'REMOVE_PRODUCT',
+    value: productsResume
+  }
 }
 
 const productsComparer = (a, b) => {
