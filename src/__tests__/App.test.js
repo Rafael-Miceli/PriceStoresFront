@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { saveProduct as sut } from '../actions/App';
+import { saveProduct, removeProducts } from '../actions/App';
 import  * as apiProduct from '../api/product';
 
 
@@ -24,7 +24,7 @@ describe('should get lower price', () => {
     }
     
     let expectedPrice = 2
-    let result = sut(productState).value
+    let result = saveProduct(productState).value
 
     expect(result.productsResume[0].lowerPrice).toBe(expectedPrice)
   })
@@ -38,7 +38,7 @@ describe('should get lower price', () => {
     }
     
     let expectedPrice = 2
-    let result = sut(productState).value
+    let result = saveProduct(productState).value
 
     expect(result.productsResume[0].lowerPrice).toBe(expectedPrice)
   })
@@ -52,7 +52,7 @@ describe('should get lower price', () => {
     }
     
     let expectedPrice = 2
-    let result = sut(productState).value
+    let result = saveProduct(productState).value
 
     expect(result.productsResume[0].lowerPrice).toBe(expectedPrice)
   })
@@ -66,7 +66,7 @@ describe('should get lower price', () => {
     }
     
     let expectedPrice = 2
-    let result = sut(productState).value
+    let result = saveProduct(productState).value
 
     expect(result.productsResume[0].lowerPrice).toBe(expectedPrice)
   })
@@ -80,7 +80,7 @@ describe('should get lower price', () => {
     }
     
     let expectedPrice = 1.75
-    let result = sut(productState).value
+    let result = saveProduct(productState).value
 
     expect(result.productsResume[0].lowerPrice).toBe(expectedPrice)
   })
@@ -94,7 +94,7 @@ describe('should get lower price', () => {
     }
     
     let expectedPrice = 1.75
-    let result = sut(productState).value
+    let result = saveProduct(productState).value
 
     expect(result.productsResume[0].lowerPrice).toBe(expectedPrice)
   })
@@ -110,7 +110,7 @@ describe('should get higher price', () => {
     }
     
     let expectedPrice = 3
-    let result = sut(productState).value
+    let result = saveProduct(productState).value
 
     expect(result.productsResume[0].higherPrice).toBe(expectedPrice)
   });
@@ -124,7 +124,7 @@ describe('should get higher price', () => {
     }
     
     let expectedPrice = 3
-    let result = sut(productState).value
+    let result = saveProduct(productState).value
 
     expect(result.productsResume[0].higherPrice).toBe(expectedPrice)
   })
@@ -138,7 +138,7 @@ describe('should get higher price', () => {
     }
     
     let expectedPrice = 5
-    let result = sut(productState).value
+    let result = saveProduct(productState).value
 
     expect(result.productsResume[0].higherPrice).toBe(expectedPrice)
   })
@@ -152,7 +152,7 @@ describe('should get higher price', () => {
     }
     
     let expectedPrice = 4
-    let result = sut(productState).value
+    let result = saveProduct(productState).value
 
     expect(result.productsResume[0].higherPrice).toBe(expectedPrice)
   })
@@ -166,7 +166,7 @@ describe('should get higher price', () => {
     }
     
     let expectedPrice = 4
-    let result = sut(productState).value
+    let result = saveProduct(productState).value
 
     expect(result.productsResume[0].higherPrice).toBe(expectedPrice)
   })
@@ -180,7 +180,7 @@ describe('should get higher price', () => {
     }
     
     let expectedPrice = 1.80
-    let result = sut(productState).value
+    let result = saveProduct(productState).value
 
     expect(result.productsResume[0].higherPrice).toBe(expectedPrice)
   })
@@ -198,7 +198,7 @@ describe('When saving a product', () => {
 
     apiProduct.addProduct = jest.fn()
 
-    let result = sut(productState).value
+    let result = saveProduct(productState).value
 
     expect(apiProduct.addProduct).toHaveBeenCalled();
   })
@@ -215,7 +215,7 @@ describe('When saving a product', () => {
 
     apiProduct.addProduct = jest.fn()
 
-    let result = sut(productState).value
+    let result = saveProduct(productState).value
 
     expect(result.productsResume[1].name).toBe('novo')
   })
@@ -230,7 +230,7 @@ describe('When saving a product', () => {
 
     apiProduct.updateProduct = jest.fn()
 
-    let result = sut(productState).value
+    let result = saveProduct(productState).value
 
     expect(apiProduct.updateProduct).toHaveBeenCalled();
   })
@@ -246,8 +246,30 @@ describe('When saving a product', () => {
 
     apiProduct.updateProduct = jest.fn()
 
-    let result = sut(productState).value
+    let result = saveProduct(productState).value
 
     expect(result.productsResume[1]).toBeUndefined()
+  })
+})
+
+describe('When deleting products', () => {
+  test('If product is checked, remove it from productsResume list', () => {    
+    let prod1 = createProductObject('a', 1.80, 1.50, 1.80)
+    let prod2 = createProductObject('b', 1.80, 1.50, 1.80)
+
+    prod2.checked = true
+
+    let productState = { 
+      productToSave: {},
+      productsResume: [ prod1, prod2 ],
+      productsName: []
+    }    
+
+    //apiProduct.addProduct = jest.fn()
+
+    let result = removeProducts(productState).value
+
+    expect(result.productsResume[1]).toBeUndefined()
+    expect(result.productsResume[0].name).toBe('a')
   })
 })

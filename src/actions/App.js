@@ -118,7 +118,7 @@ export const removeProducts = productsState => {
 
   return {
     type: 'REMOVE_PRODUCT',
-    value: productsResume
+    value: productsState
   }
 }
 
