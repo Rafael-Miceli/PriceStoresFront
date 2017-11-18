@@ -163,22 +163,24 @@ class App extends Component {
           <Modal
             isOpen={this.state.modalIsOpen}
             style={customStyles}
-            contentLabel="Example Modal"
+            contentLabel="Building"
           >
 
-            <h5>Quer mesmo remover os produtos selecionados?</h5>
+          <h5>Ainda estou em construção</h5>
+            {/* <h5>Quer mesmo remover os produtos selecionados?</h5> */}
             <div></div>
-            <Button className='blue' onClick={() => this.setState({modalIsOpen: false})}>Não</Button>
-            <Button className='red' style={{float: 'right'}} onClick={this.removeProducts.bind(this)} >Sim</Button>         
+            <Button className='blue' onClick={() => this.setState({modalIsOpen: false})}>Poxa...</Button>
+            {/* <Button className='blue' onClick={() => this.setState({modalIsOpen: false})}>Não</Button> */}
+            {/* <Button className='red' style={{float: 'right'}} onClick={this.removeProducts.bind(this)} >Sim</Button>          */}
             
           </Modal>
             
           <Button floating fab='horizontal' icon='mode_edit' className='blue' large style={{bottom: '45px', right: '24px'}}>
-            <Button floating icon='shopping_cart' className='green' />
-            <Button floating icon='delete_forever' className='red' onClick={() => {
+            <Button floating icon='shopping_cart' className='green' onClick={() => this.setState({modalIsOpen: true})}/>
+            {/* <Button floating icon='delete_forever' className='red' onClick={() => {
               console.log("Preparando para deletar todos checkeds mostrar modal")
               this.setState({modalIsOpen: true})
-            }}/>
+            }}/> */}
           </Button>
       </div>
     );
