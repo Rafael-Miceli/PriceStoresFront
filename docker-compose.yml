@@ -1,12 +1,7 @@
 version: '3.1'
 
 services:  
-  jenkins:
-    image: jareddlc/jenkins-with-docker-socket:latest
-    ports:
-      - "8080:8080"
-      - "50000:50000"
-    restart: "always"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
+  price-store-front:
+    image: rafaelmiceli/pricestore-front:1.0.${GIT_COMMIT}
+    build: .
   
