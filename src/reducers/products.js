@@ -21,7 +21,7 @@ export const productReducer = (state, {type, value}) => {
 
     switch (type) {
         case SAVE_PRODUCT:  
-            return {...state, newProduct: value}            
+            return {...state}            
         case GET_PRODUCTS_RESUME:
             state = value
             return {...state}
