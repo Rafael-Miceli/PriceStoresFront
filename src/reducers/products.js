@@ -1,4 +1,4 @@
-import { SAVE_PRODUCT, GET_PRODUCTS_RESUME, GET_PRODUCTS_RESUME_SUCCESS } from '../constants/ActionTypes'
+import { SAVE_PRODUCT, GET_PRODUCTS_RESUME, GET_PRODUCTS_RESUME_SUCCESS, REMOVE_PRODUCT } from '../constants/ActionTypes'
 import localforage from 'localforage'
 
 const defaultState = {
@@ -21,7 +21,7 @@ export const productReducer = (state, {type, value}) => {
 
     switch (type) {
         case SAVE_PRODUCT:  
-            return {...state, newProduct: value}
+            return {...state, newProduct: value}            
         case GET_PRODUCTS_RESUME:
             state = value
             return {...state}
@@ -44,6 +44,9 @@ export const productReducer = (state, {type, value}) => {
               })
 
             return {...state}
+
+        case REMOVE_PRODUCT:  
+            return {...state, newProduct: value}
         default:
             return {...state}
     }

@@ -272,4 +272,28 @@ describe('When deleting products', () => {
     expect(result.productsResume[1]).toBeUndefined()
     expect(result.productsResume[0].name).toBe('a')
   })
+
+  test('If product is checked, remove it from productsResume list', () => {    
+    let prod1 = createProductObject('a', 1.80, 1.50, 1.80)
+    let prod2 = createProductObject('b', 1.80, 1.50, 1.80)
+    let prod3 = createProductObject('c', 1.80, 1.50, 1.80)
+    let prod4 = createProductObject('d', 1.80, 1.50, 1.80)
+
+    prod2.checked = true
+    prod4.checked = true
+
+    let productState = { 
+      productToSave: {},
+      productsResume: [ prod1, prod2, prod3, prod4 ],
+      productsName: []
+    }    
+
+    //apiProduct.addProduct = jest.fn()
+
+    let result = removeProducts(productState).value
+
+    expect(result.productsResume[2]).toBeUndefined()
+    expect(result.productsResume[0].name).toBe('a')
+    expect(result.productsResume[1].name).toBe('c')
+  })
 })
