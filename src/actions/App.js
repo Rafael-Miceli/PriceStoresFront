@@ -113,6 +113,7 @@ export const removeProducts = productsState => {
   //Chamar API para remover os produtos
 
   productsState.productsResume = productsResume.filter(p => !p.checked)
+  productsState.productsResumeTableFilter = productsState.productsResume
 
   console.log('Estado de produtos removidos ', productsState)
 

@@ -46,7 +46,8 @@ export const productReducer = (state, {type, value}) => {
             return {...state}
 
         case REMOVE_PRODUCT:  
-            return {...state, newProduct: value}
+            state = value
+            return {...state}
         default:
             return {...state}
     }

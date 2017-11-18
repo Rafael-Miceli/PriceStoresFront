@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import logo from '../logo.svg'
 import '../App.css'
 import { store } from '../stores/productStores'
-import { saveProduct, getProductsResume } from '../actions/App'
+import { saveProduct, getProductsResume, removeProducts } from '../actions/App'
 import { Collection, CollectionItem, Input, Row, Button, Autocomplete } from 'react-materialize'
 import Modal from 'react-modal'
 
@@ -22,6 +22,12 @@ class App extends Component {
   saveProduct() {
     store.dispatch(saveProduct(this.state))
     this.cleanFields()
+  }
+
+  removeProducts() {
+    store.dispatch(removeProducts(this.state))
+    this.cleanFields()
+    this.setState({modalIsOpen: false})
   }
 
   filterProductBy(value) {
@@ -43,7 +49,6 @@ class App extends Component {
 
     //Gambiarra porque ReactMaterialize Input não expõe focus
     ReactDOM.findDOMNode(this.nameInput).children[0].focus()
-    ReactDOM.findDOMNode(this.filterInput).children[0].focus()
   }
 
   cellClick(product) {
@@ -60,9 +65,8 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Vamos garantir pagar o menor preço dos produtos do mercado</h2>
         </div>        
-          <span>Adicione produto e seu preço </span>
+          <h3>Adicione um Produto</h3>
           <Row>
             <Autocomplete
               s={6}
@@ -99,7 +103,6 @@ class App extends Component {
               value={this.state.productToSave.price}
               />
           </Row>  
-          {/* <input type="date" /> */}
 
           <Button onClick={this.saveProduct.bind(this)}>Salvar</Button>                    
 
@@ -166,7 +169,7 @@ class App extends Component {
             <h5>Quer mesmo remover os produtos selecionados?</h5>
             <div></div>
             <Button className='blue' onClick={() => this.setState({modalIsOpen: false})}>Não</Button>
-            <Button className='red' style={{float: 'right'}} >Sim</Button>         
+            <Button className='red' style={{float: 'right'}} onClick={this.removeProducts.bind(this)} >Sim</Button>         
             
           </Modal>
             
