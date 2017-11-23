@@ -1,5 +1,5 @@
 import { SAVE_PRODUCT, GET_PRODUCTS_RESUME, GET_PRODUCTS_RESUME_SUCCESS, REMOVE_PRODUCT } from '../constants/ActionTypes'
-import { getAllProductsResume, addProduct, updateProduct } from '../api/product'
+import { getAllProductsResume, addProduct, updateProduct, removeProducts as removeProductsApi } from '../api/product'
 import localforage from 'localforage'
 
 
@@ -115,6 +115,7 @@ export const removeProducts = productsState => {
   console.log('produtos a remover ', productsToRemove)
 
   //Chamar API para remover os produtos
+  removeProductsApi(productsToRemove.map(p => p.name))
 
   productsState.productsResume = productsResume.filter(p => !p.checked)
   productsState.productsResumeTableFilter = productsState.productsResume

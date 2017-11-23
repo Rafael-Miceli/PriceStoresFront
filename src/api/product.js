@@ -84,4 +84,19 @@ export const updateProduct = (product, cb) => {
     })
 }
 
+export const removeProducts = (productsName) => {
+    console.log("Removendo produtos na base ", productsName)
+    fetch(baseAddress + '/api/product', {
+        method: 'DELETE',
+        headers: new Headers({
+          'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify(productsName)
+    })
+    .then(response => console.log(response.json()))
+    .catch(error => {
+        console.log("Algo deu errado ", error)
+    })
+}
+
 //https://developers.google.com/web/updates/2015/03/introduction-to-fetch
