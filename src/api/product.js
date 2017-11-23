@@ -93,7 +93,7 @@ export const removeProducts = (productsName) => {
         }),
         body: JSON.stringify(productsName)
     })
-    .then(response => console.log(response.json()))
+    .then(response => console.log(response))
     .catch(error => {
         console.log("Algo deu errado ", error)
     })
