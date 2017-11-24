@@ -265,7 +265,7 @@ describe('When deleting products', () => {
       productsName: []
     }    
 
-    //apiProduct.addProduct = jest.fn()
+    apiProduct.removeProducts = jest.fn()
 
     let result = removeProducts(productState).value
 
@@ -288,7 +288,7 @@ describe('When deleting products', () => {
       productsName: []
     }    
 
-    //apiProduct.addProduct = jest.fn()
+    apiProduct.removeProducts = jest.fn()
 
     let result = removeProducts(productState).value
 

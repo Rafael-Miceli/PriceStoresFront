@@ -163,13 +163,10 @@ class App extends Component {
           <Modal
             isOpen={this.state.modalIsOpen}
             style={customStyles}
-            contentLabel="Building"
-          >
+            contentLabel="Building" >
 
-          {/* <h5>Ainda estou em construção</h5> */}
             <h5>Quer mesmo remover os produtos selecionados?</h5>
             <div></div>
-            {/* <Button className='blue' onClick={() => this.setState({modalIsOpen: false})}>Poxa...</Button> */}
             <Button className='blue' onClick={() => this.setState({modalIsOpen: false})}>Não</Button>
             <Button className='red' style={{float: 'right'}} onClick={this.removeProducts.bind(this)} >Sim</Button>         
             
