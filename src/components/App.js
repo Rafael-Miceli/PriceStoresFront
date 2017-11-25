@@ -15,8 +15,6 @@ class App extends Component {
     super(props)
 
     this.state = store.getState()
-
-    let result = store.dispatch(getProductsResume())        
   }
 
   saveProduct() {

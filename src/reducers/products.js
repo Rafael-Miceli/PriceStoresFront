@@ -14,8 +14,6 @@ const defaultState = {
 
 export const productReducer = (state, {type, value}) => {
 
-    console.log("Estado ", state);
-
     if(state === undefined)
         state = defaultState;
 

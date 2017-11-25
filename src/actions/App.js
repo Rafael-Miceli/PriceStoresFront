@@ -1,4 +1,4 @@
-import { SAVE_PRODUCT, GET_PRODUCTS_RESUME, GET_PRODUCTS_RESUME_SUCCESS, REMOVE_PRODUCT } from '../constants/ActionTypes'
+import { SAVE_PRODUCT, GET_PRODUCTS_RESUME_SUCCESS, REMOVE_PRODUCT } from '../constants/ActionTypes'
 import { getAllProductsResume, addProduct, updateProduct, removeProducts as removeProductsApi } from '../api/product'
 import localforage from 'localforage'
 
