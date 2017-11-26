@@ -104,7 +104,6 @@ class App extends Component {
                 productToSave.price = e.target.value;
                 this.setState({productToSave})
               }} 
-              value={this.state.productToSave.price}
               />
           </Row>  
 
@@ -196,7 +195,8 @@ App.propTypes = {
   fetchProducts: PropTypes.func.isRequired,
   productsResume: PropTypes.array.isRequired,
   productsResumeTableFilter: PropTypes.array.isRequired,
-  productToSave: PropTypes.object.isRequired
+  productToSave: PropTypes.object.isRequired,
+  productsName: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => {
@@ -206,7 +206,8 @@ const mapStateToProps = (state) => {
   return {
     productsResume: state.reducer.productsResume,
     productsResumeTableFilter: state.reducer.productsResumeTableFilter,
-    productToSave: state.reducer.productToSave
+    productToSave: state.reducer.productToSave,
+    productsName: state.reducer.productsName
   }
 }
 
