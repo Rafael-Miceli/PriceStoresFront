@@ -4,18 +4,22 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import logo from '../logo.svg'
 import '../App.css'
-import { store } from '../stores/productStores'
+import configureStore from '../stores/productStores'
 import { saveProduct, getProductsResume, removeProducts } from '../actions/App'
 import { Collection, CollectionItem, Input, Row, Button, Autocomplete } from 'react-materialize'
 import Modal from 'react-modal'
+
+const { store } = configureStore()
 
 class App extends Component {
 
   constructor(props) {
     super(props)
 
+    console.log('Indo bucar estado')
     this.state = store.getState()
 
+    console.log('Indo bucar ProductsResume')
     store.dispatch(getProductsResume())        
   }
 
