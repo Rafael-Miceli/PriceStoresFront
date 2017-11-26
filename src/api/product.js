@@ -10,7 +10,7 @@ const defaultState = {
     productsResume: []
 }
 
-const baseAddress= process.env.REACT_APP_API; //"http://pricestore-api.azurewebsites.net";
+const baseAddress = process.env.REACT_APP_API //"http://pricestore-api.azurewebsites.net";
 
 export const getAllProductsResume = () => {    
     return (dispatch) => {
@@ -31,13 +31,7 @@ export const getAllProductsResume = () => {
             dispatch(getProductsResumeSuccess(productsResume))
         })
         .catch(error => {
-            console.log("Algo deu errado ", error)
-            console.log("Buscando do cache ")
-            localforage.getItem('productsResume').then(result => {
-                console.log(result)
-                dispatch(getProductsResumeSuccess(result))
-                return result
-            })
+            console.log("Algo deu errado ", error)            
         })
     }
 }

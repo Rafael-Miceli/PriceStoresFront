@@ -41,17 +41,6 @@ export const saveProduct = productsState => {
 
     productsState.productsName[productToSave.name] = null
   }
-
-  console.log("localForage ", localforage)
-
-  localforage.setItem('productsResume', productsResume)
-  .then(() => {})
-  .then(value => {
-    console.log("Adicionado ao local cache ", value)
-  })
-  .catch(err => {
-    console.log("Erro ao adicionar em local cache ", err)
-  })
   
   productsState.productsResumeTableFilter = productsState.productsResume
 

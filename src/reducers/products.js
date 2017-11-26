@@ -25,21 +25,16 @@ export const productReducer = (state, {type, value}) => {
             return {...state}
         case GET_PRODUCTS_RESUME_SUCCESS:               
 
+            if (value === null)
+                return {...state}
+
             state.productsResume = value.slice()
             state.productsResumeTableFilter = value.slice()
 
             //Para o AutoComplete
             value.forEach((product, i) => {
                     state.productsName[product.name] = null;
-            })
-
-            localforage.setItem('productsResume', state.productsResume).then(() => {
-                
-              }).then(value => {
-                console.log("Adicionado ao local cache ", value)
-              }).catch(err => {
-                console.log("Erro ao adicionar em local cache ", err)
-              })
+            })            
 
             return {...state}
 
