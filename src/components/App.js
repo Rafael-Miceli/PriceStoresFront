@@ -9,7 +9,7 @@ import { saveProduct, getProductsResume, removeProducts } from '../actions/App'
 import { Collection, CollectionItem, Input, Row, Button, Autocomplete } from 'react-materialize'
 import Modal from 'react-modal'
 
-const { store } = configureStore()
+const { store, persistor } = configureStore()
 
 class App extends Component {
 
