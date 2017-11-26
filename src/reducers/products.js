@@ -1,5 +1,4 @@
 import { SAVE_PRODUCT, GET_PRODUCTS_RESUME, GET_PRODUCTS_RESUME_SUCCESS, REMOVE_PRODUCT } from '../constants/ActionTypes'
-import localforage from 'localforage'
 
 const defaultState = {
     productToSave:{

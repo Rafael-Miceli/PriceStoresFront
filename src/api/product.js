@@ -1,6 +1,5 @@
 import { getProductsResumeSuccess } from '../actions/App'  
 import 'whatwg-fetch'
-import localforage from 'localforage'
 
 const defaultState = {
     productToSave:{

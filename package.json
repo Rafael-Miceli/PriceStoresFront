@@ -7,18 +7,14 @@
     "react-scripts": "^1.0.17"
   },
   "dependencies": {
-    "axios": "^0.17.0",
-    "localforage": "^1.5.3",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-materialize": "^1.0.17",
     "react-modal": "^3.1.2",
     "react-redux": "^5.0.6",
-    "react-table": "^6.7.4",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
-    "redux-persist": "^5.4.0",
     "redux-thunk": "^2.2.0",
     "whatwg-fetch": "^2.0.3"
   },
