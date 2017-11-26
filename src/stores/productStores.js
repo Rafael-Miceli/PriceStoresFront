@@ -23,13 +23,7 @@ const reducer = persistCombineReducers(config, {reducer: productReducer})
 
 export default function configureStore() {
 
-  console.log('persist storage ', storage)
-  console.log('product reducer ', productReducer)
-  console.log('combined reducers ', reducer)
-
   let store = createStore(reducer, applyMiddleware(...middleware))
-
-  console.log('Store criada')
 
   let persistor = persistStore(store)
   return { store, persistor }

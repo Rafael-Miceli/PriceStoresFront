@@ -16,10 +16,10 @@ class App extends Component {
   constructor(props) {
     super(props)
 
-    console.log('Indo bucar estado')
-    this.state = store.getState()
+    console.log('props ', props)
+    this.state = props
+    console.log('state ', this.state)
 
-    console.log('Indo bucar ProductsResume')
     store.dispatch(getProductsResume())        
   }
 
@@ -195,13 +195,18 @@ class App extends Component {
 App.propTypes = {
   fetchProducts: PropTypes.func.isRequired,
   productsResume: PropTypes.array.isRequired,
-  productsResumeTableFilter: PropTypes.array.isRequired
+  productsResumeTableFilter: PropTypes.array.isRequired,
+  productToSave: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => {
+
+  console.log('mapStateToProps ', state)
+
   return {
-    productsResume: state.productsResume,
-    productsResumeTableFilter: state.productsResumeTableFilter
+    productsResume: state.reducer.productsResume,
+    productsResumeTableFilter: state.reducer.productsResumeTableFilter,
+    productToSave: state.reducer.productToSave
   }
 }
 

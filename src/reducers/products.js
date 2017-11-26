@@ -11,7 +11,7 @@ const defaultState = {
     modalIsOpen: false
 }
 
-export const productReducer = (state = defaultState, action) => {
+export const productReducer = (state, action) => {
 
     let type = action.type
     let value = action.value
@@ -20,8 +20,8 @@ export const productReducer = (state = defaultState, action) => {
     console.log('Inicio do reducer 2 ', type)
     console.log('Inicio do reducer 3 ', value)
 
-    // if(state === undefined)
-    //     state = defaultState;
+    if(state === undefined)
+        state = defaultState;
 
     switch (type) {
         case SAVE_PRODUCT:  
