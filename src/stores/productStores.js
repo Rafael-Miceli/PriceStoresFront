@@ -7,7 +7,8 @@ import { productReducer } from '../reducers/products'
 
 const config = {
   key: 'root',
-  storage
+  storage,
+  debug: true
 }
 
 const middleware = [ thunk ];
@@ -17,12 +18,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const reducer = persistCombineReducers(config, {reducer: productReducer})
 
-//export const store = createStore(reducer, applyMiddleware(...middleware))
-
-//export const persistor = persistStore(store)
-
 export default function configureStore() {
-
   let store = createStore(reducer, applyMiddleware(...middleware))
 
   let persistor = persistStore(store)

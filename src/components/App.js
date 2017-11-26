@@ -205,7 +205,7 @@ const mapStateToProps = (state) => {
 
   return {
     productsResume: state.reducer.productsResume,
-    productsResumeTableFilter: state.reducer.productsResumeTableFilter,
+    productsResumeTableFilter: state.reducer.productsResume.slice(),
     productToSave: state.reducer.productToSave,
     productsName: state.reducer.productsName
   }
