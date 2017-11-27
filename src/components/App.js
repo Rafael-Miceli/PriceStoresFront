@@ -20,7 +20,7 @@ class App extends Component {
     this.state = props
     console.log('state ', this.state)
 
-    store.dispatch(getProductsResume())        
+    this.state.fetchProducts()
   }
 
   saveProduct() {

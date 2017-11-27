@@ -26,7 +26,6 @@ export const getAllProductsResume = () => {
         })
         .then(response => response.json())
         .then(productsResume => {            
-            console.log("json retornado ", productsResume)
             dispatch(getProductsResumeSuccess(productsResume))
         })
         .catch(error => {

@@ -31,14 +31,15 @@ export const productReducer = (state = defaultState, action) => {
                 return state
 
             state.productsResume = value.slice()
-            state.productsResumeTableFilter = value.slice()
 
             //Para o AutoComplete
             value.forEach((product, i) => {
-                    state.productsName[product.name] = null;
-            })            
+                state.productsName[product.name] = null;
+            })  
+            
+            console.log('Retornando estado ', state)
 
-            return {...state}
+            return state
 
         case REMOVE_PRODUCT:  
             state = value
