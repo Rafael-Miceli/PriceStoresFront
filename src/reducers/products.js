@@ -31,6 +31,7 @@ export const productReducer = (state = defaultState, action) => {
                 return state
 
             state.productsResume = value.slice()
+            state.productsResumeTableFilter = value.slice()
 
             //Para o AutoComplete
             value.forEach((product, i) => {
@@ -39,7 +40,7 @@ export const productReducer = (state = defaultState, action) => {
             
             console.log('Retornando estado ', state)
 
-            return state
+            return {...state}
 
         case REMOVE_PRODUCT:  
             state = value

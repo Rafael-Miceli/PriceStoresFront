@@ -79,8 +79,7 @@ class App extends Component {
               autoFocus required
               ref={myInput => this.nameInput = myInput }
               onChange={e => {
-
-                if (!e.target.value) return
+                if (e.target.value === undefined) return
 
                 let productToSave = {...this.state.productToSave}
                 productToSave.name = e.target.value
