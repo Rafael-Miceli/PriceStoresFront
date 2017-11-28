@@ -27,20 +27,26 @@ export const productReducer = (state = defaultState, action) => {
             return {...state}
         case GET_PRODUCTS_RESUME_SUCCESS:               
 
-            if (value === null)
-                return state
+            // if (value === null)
+            //     return state
 
-            state.productsResume = value.slice()
-            state.productsResumeTableFilter = value.slice()
+            // state.productsResume = value.slice()
+            // state.productsResumeTableFilter = value.slice()
 
-            //Para o AutoComplete
-            value.forEach((product, i) => {
-                state.productsName[product.name] = null;
-            })  
+            // //Para o AutoComplete
+            // value.forEach((product, i) => {
+            //     state.productsName[product.name] = null;
+            // })
             
-            console.log('Retornando estado ', state)
+            // console.log('Retornando estado ', value)
 
-            return {...state}
+            // let clonado = clone(value)
+
+            // console.log('clonado ', clonado)
+
+            
+
+            return value
 
         case REMOVE_PRODUCT:  
             state = value
@@ -49,3 +55,5 @@ export const productReducer = (state = defaultState, action) => {
             return state
     }
 }
+
+const clone = obj => Object.assign(defaultState, ...obj);

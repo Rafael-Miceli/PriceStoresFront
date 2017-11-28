@@ -90,9 +90,28 @@ export const getProductsResume = () => {
 }
 
 export const getProductsResumeSuccess = (productsResume) => {
+  let defaultState = {
+    productToSave:{
+        name: '',
+        price: 0
+    },
+    productsResume: [],
+    productsResumeTableFilter: [],
+    productsName: {},
+    modalIsOpen: false
+  }
+
+  defaultState.productsResume = productsResume.slice()
+  defaultState.productsResumeTableFilter = productsResume.slice()
+
+  //Para o AutoComplete
+  productsResume.forEach((product, i) => {
+    defaultState.productsName[product.name] = null;
+  })
+
   return {
     type: GET_PRODUCTS_RESUME_SUCCESS,
-    value: productsResume
+    value: {...defaultState}
   }  
 }
 
