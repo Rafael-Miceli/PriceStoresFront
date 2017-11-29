@@ -110,6 +110,8 @@ class App extends Component {
 
           <h3>Produtos</h3>
 
+          Tenho produtos? {this.state.gotProducts.toString()}
+
           <Row>
             <Autocomplete
                 s={12}
@@ -201,12 +203,16 @@ App.propTypes = {
 const mapStateToProps = (state) => {
 
   console.log('mapStateToProps ', state)
+  let newState = Object.assign({}, state)
+  let newReducer = Object.assign({}, newState.reducer)
+  newState.reducer = newReducer
 
   return {
-    productsResume: state.reducer.productsResume,
-    productsResumeTableFilter: state.reducer.productsResume.slice(),
-    productToSave: state.reducer.productToSave,
-    productsName: state.reducer.productsName
+    productsResume: newState.reducer.productsResume,
+    productsResumeTableFilter: newState.reducer.productsResume.slice(),
+    productToSave: newState.reducer.productToSave,
+    productsName: newState.reducer.productsName,
+    gotProducts: newState.reducer.gotProducts
   }
 }
 

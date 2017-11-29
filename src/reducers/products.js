@@ -8,7 +8,8 @@ const defaultState = {
     productsResume: [],
     productsResumeTableFilter: [],
     productsName: {},
-    modalIsOpen: false
+    modalIsOpen: false,
+    gotProducts: false
 }
 
 export const productReducer = (state = defaultState, action) => {
@@ -43,10 +44,13 @@ export const productReducer = (state = defaultState, action) => {
             // let clonado = clone(value)
 
             // console.log('clonado ', clonado)
+            //state = 
 
             
 
-            return value
+            return Object.assign({}, state, {
+                gotProducts: true
+            })
 
         case REMOVE_PRODUCT:  
             state = value

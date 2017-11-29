@@ -98,7 +98,8 @@ export const getProductsResumeSuccess = (productsResume) => {
     productsResume: [],
     productsResumeTableFilter: [],
     productsName: {},
-    modalIsOpen: false
+    modalIsOpen: false,
+    gotProducts: true
   }
 
   defaultState.productsResume = productsResume.slice()
