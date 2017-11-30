@@ -92,7 +92,7 @@ export const getProductsResume = () => {
 export const getProductsResumeSuccess = (productsResume) => {
   let defaultState = {
     productToSave:{
-        name: '',
+        name: 'teste',
         price: 0
     },
     productsResume: [],
@@ -112,7 +112,7 @@ export const getProductsResumeSuccess = (productsResume) => {
 
   return {
     type: GET_PRODUCTS_RESUME_SUCCESS,
-    value: {...defaultState}
+    value: defaultState
   }  
 }
 

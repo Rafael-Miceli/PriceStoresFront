@@ -46,11 +46,13 @@ export const productReducer = (state = defaultState, action) => {
             // console.log('clonado ', clonado)
             //state = 
 
-            
+            console.log('state == newState? ', state === value)
 
-            return Object.assign({}, state, {
-                gotProducts: true
-            })
+            state = value
+
+            console.log('reducer depois da API ', {...state})
+            
+            return {...state}
 
         case REMOVE_PRODUCT:  
             state = value

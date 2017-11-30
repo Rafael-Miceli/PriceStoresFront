@@ -16,11 +16,11 @@ class App extends Component {
   constructor(props) {
     super(props)
 
+    this.props.fetchProducts()
+
     console.log('props ', props)
     this.state = props
-    console.log('state ', this.state)
-
-    this.state.fetchProducts()
+    console.log('state ', this.state)    
   }
 
   saveProduct() {
@@ -203,16 +203,13 @@ App.propTypes = {
 const mapStateToProps = (state) => {
 
   console.log('mapStateToProps ', state)
-  let newState = Object.assign({}, state)
-  let newReducer = Object.assign({}, newState.reducer)
-  newState.reducer = newReducer
 
   return {
-    productsResume: newState.reducer.productsResume,
-    productsResumeTableFilter: newState.reducer.productsResume.slice(),
-    productToSave: newState.reducer.productToSave,
-    productsName: newState.reducer.productsName,
-    gotProducts: newState.reducer.gotProducts
+    productsResume: state.reducer.productsResume,
+    productsResumeTableFilter: state.reducer.productsResume.slice(),
+    productToSave: state.reducer.productToSave,
+    productsName: state.reducer.productsName,
+    gotProducts: state.reducer.gotProducts
   }
 }
 
