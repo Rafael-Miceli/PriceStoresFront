@@ -16,11 +16,12 @@ class App extends Component {
   constructor(props) {
     super(props)
 
-    this.props.fetchProducts()
-
-    console.log('props ', props)
     this.state = props
-    console.log('state ', this.state)    
+    var result = this.props.fetchProducts()
+
+    result.then(response => {
+      this.setState(this.props)
+    })    
   }
 
   saveProduct() {
@@ -109,9 +110,7 @@ class App extends Component {
           <Button onClick={this.saveProduct.bind(this)}>Salvar</Button>                    
 
           <h3>Produtos</h3>
-
-          Tenho produtos? {this.state.gotProducts.toString()}
-
+          
           <Row>
             <Autocomplete
                 s={12}
@@ -138,14 +137,14 @@ class App extends Component {
               return (null)
 
             return ( 
-              <Collection header={productCategory.categoryName}>
+              <Collection header={productCategory.categoryName} key={productCategory.categoryName}>
                   {this.state.productsResumeTableFilter.map((product, index) => {  
                     if(!product.checked)
                       product.checked = false
                       
                     if (product.categoryName === productCategory.categoryName)
                       return ( 
-                          <CollectionItem onClick={this.cellClick.bind(this, product.name)} style={{textAlign: 'left'}}>                    
+                          <CollectionItem onClick={this.cellClick.bind(this, product.name)} style={{textAlign: 'left'}} key={product.name}>                    
                             <Input className='filled-in' type='checkbox' checked={product.checked} label={product.name} 
                               onChange={() => {
                                 

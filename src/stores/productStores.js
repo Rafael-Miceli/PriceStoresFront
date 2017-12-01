@@ -1,6 +1,6 @@
-import { persistStore, persistCombineReducers } from 'redux-persist'
+import { persistStore, persistCombineReducers, autoRehydrate } from 'redux-persist'
 import storage from 'redux-persist/es/storage'
-import { createStore, applyMiddleware } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk'
 import { productReducer } from '../reducers/products'
