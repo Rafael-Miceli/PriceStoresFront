@@ -248,7 +248,7 @@ describe('When saving a product', () => {
 
     let result = saveProduct(productState).value
 
-    expect(result.productsResume[1]).toBeUndefined()
+    expect(result.productsResume[1]).toBe(0)
   })
 })
 
