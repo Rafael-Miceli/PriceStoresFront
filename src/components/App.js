@@ -1,18 +1,22 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import ReactDOM from 'react-dom'
 import logo from '../logo.svg'
 import '../App.css'
 import ProductsList from './ProductsList'
-import { store } from '../stores/productStores'
+import configureStore from '../stores/productStores'
 import { saveProduct, removeProducts } from '../actions/App'
 import { Input, Row, Button, Autocomplete } from 'react-materialize'
+
+const { store, persistor } = configureStore()
 
 class App extends Component {
 
   constructor(props) {
     super(props)
 
-    this.state = store.getState()
+    this.state = props
   }
 
   saveProduct() {
@@ -45,8 +49,7 @@ class App extends Component {
               autoFocus required
               ref={myInput => this.nameInput = myInput }
               onChange={e => {
-
-                if (!e.target.value) return
+                if (e.target.value === undefined) return
 
                 let productToSave = {...this.state.productToSave}
                 productToSave.name = e.target.value
@@ -70,7 +73,6 @@ class App extends Component {
                 productToSave.price = e.target.value;
                 this.setState({productToSave})
               }} 
-              value={this.state.productToSave.price}
               />
           </Row>  
 
@@ -79,6 +81,21 @@ class App extends Component {
           <ProductsList />
       </div>
     );
+  }
+}
+
+App.propTypes = {
+  productToSave: PropTypes.object.isRequired,
+  productsName: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => {
+
+  console.log('mapStateToProps App ', state)
+
+  return {
+    productToSave: state.reducer.productToSave,
+    productsName: state.reducer.productsName
   }
 }
 
@@ -93,4 +110,4 @@ const customStyles = {
   }
 }
 
-export default App;
+export default connect(mapStateToProps)(App);

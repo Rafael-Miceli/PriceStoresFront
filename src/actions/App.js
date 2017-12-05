@@ -1,6 +1,5 @@
-import { SAVE_PRODUCT, GET_PRODUCTS_RESUME, GET_PRODUCTS_RESUME_SUCCESS, REMOVE_PRODUCT } from '../constants/ActionTypes'
+import { SAVE_PRODUCT, GET_PRODUCTS_RESUME_SUCCESS, REMOVE_PRODUCT } from '../constants/ActionTypes'
 import { getAllProductsResume, addProduct, updateProduct, removeProducts as removeProductsApi } from '../api/product'
-import localforage from 'localforage'
 
 
 export const saveProduct = productsState => {
@@ -41,17 +40,6 @@ export const saveProduct = productsState => {
 
     productsState.productsName[productToSave.name] = null
   }
-
-  console.log("localForage ", localforage)
-
-  localforage.setItem('productsResume', productsResume)
-  .then(() => {})
-  .then(value => {
-    console.log("Adicionado ao local cache ", value)
-  })
-  .catch(err => {
-    console.log("Erro ao adicionar em local cache ", err)
-  })
   
   productsState.productsResumeTableFilter = productsState.productsResume
 
@@ -102,9 +90,28 @@ export const getProductsResume = () => {
 }
 
 export const getProductsResumeSuccess = (productsResume) => {
+  let defaultState = {
+    productToSave:{
+        name: 'teste',
+        price: 0
+    },
+    productsResume: [],
+    productsResumeTableFilter: [],
+    productsName: {},
+    modalIsOpen: false
+  }
+
+  defaultState.productsResume = productsResume.slice()
+  defaultState.productsResumeTableFilter = productsResume.slice()
+
+  //Para o AutoComplete
+  productsResume.forEach((product, i) => {
+    defaultState.productsName[product.name] = null;
+  })
+
   return {
     type: GET_PRODUCTS_RESUME_SUCCESS,
-    value: productsResume
+    value: defaultState
   }  
 }
 

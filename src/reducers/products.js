@@ -1,5 +1,4 @@
 import { SAVE_PRODUCT, GET_PRODUCTS_RESUME, GET_PRODUCTS_RESUME_SUCCESS, REMOVE_PRODUCT } from '../constants/ActionTypes'
-import localforage from 'localforage'
 
 const defaultState = {
     productToSave:{
@@ -12,43 +11,29 @@ const defaultState = {
     modalIsOpen: false
 }
 
-export const productReducer = (state, {type, value}) => {
+export const productReducer = (state = defaultState, action) => {
 
-    console.log("Estado ", state);
+    let type = action.type
+    let value = action.value
 
-    if(state === undefined)
-        state = defaultState;
+    console.log('Estado ', value)
 
     switch (type) {
-        case SAVE_PRODUCT:  
-            return {...state}            
+        
+        case SAVE_PRODUCT: 
+            state = value 
+            return {...state}
         case GET_PRODUCTS_RESUME:
             state = value
             return {...state}
-        case GET_PRODUCTS_RESUME_SUCCESS:               
-
-            state.productsResume = value.slice()
-            state.productsResumeTableFilter = value.slice()
-
-            //Para o AutoComplete
-            value.forEach((product, i) => {
-                    state.productsName[product.name] = null;
-            })
-
-            localforage.setItem('productsResume', state.productsResume).then(() => {
-                
-              }).then(value => {
-                console.log("Adicionado ao local cache ", value)
-              }).catch(err => {
-                console.log("Erro ao adicionar em local cache ", err)
-              })
-
+        case GET_PRODUCTS_RESUME_SUCCESS:                       
+            state = value
             return {...state}
 
         case REMOVE_PRODUCT:  
             state = value
             return {...state}
         default:
-            return {...state}
+            return state
     }
 }

@@ -2,19 +2,25 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import '../App.css'
-import { store } from '../stores/productStores'
+import configureStore from '../stores/productStores'
 import { getProductsResume, removeProducts } from '../actions/App'
 import { Collection, CollectionItem, Input, Row, Button, Autocomplete } from 'react-materialize'
 import Modal from 'react-modal'
+
+const { store, persistor } = configureStore()
 
 class ProductsList extends Component {
 
   constructor(props) {
     super(props)
 
-    this.state = store.getState()
+    this.state = props
 
-    let result = store.dispatch(getProductsResume())        
+    var result = this.props.fetchProducts()
+
+    result.then(response => {
+      this.setState(this.props)
+    })
   }
 
   removeProducts() {
@@ -72,14 +78,14 @@ class ProductsList extends Component {
               return (null)
 
             return ( 
-              <Collection header={productCategory.categoryName}>
+              <Collection header={productCategory.categoryName} key={productCategory.categoryName}>
                   {this.state.productsResumeTableFilter.map((product, index) => {  
                     if(!product.checked)
                       product.checked = false
                       
                     if (product.categoryName === productCategory.categoryName)
                       return ( 
-                          <CollectionItem onClick={this.cellClick.bind(this, product.name)} style={{textAlign: 'left'}}>                    
+                          <CollectionItem onClick={this.cellClick.bind(this, product.name)} style={{textAlign: 'left'}} key={product.name}>                    
                             <Input className='filled-in' type='checkbox' checked={product.checked} label={product.name} 
                               onChange={() => {
                                 
@@ -129,13 +135,18 @@ class ProductsList extends Component {
 ProductsList.propTypes = {
   fetchProducts: PropTypes.func.isRequired,
   productsResume: PropTypes.array.isRequired,
-  productsResumeTableFilter: PropTypes.array.isRequired
+  productsResumeTableFilter: PropTypes.array.isRequired,
+  productsName: PropTypes.object.isRequired
 }
 
 const mapStateToProps = (state) => {
+
+  console.log('mapStateToProps ProductList ', state)
+
   return {
-    productsResume: state.productsResume,
-    productsResumeTableFilter: state.productsResumeTableFilter
+    productsResume: state.reducer.productsResume,
+    productsResumeTableFilter: state.reducer.productsResumeTableFilter,
+    productsName: state.reducer.productsName
   }
 }
 
