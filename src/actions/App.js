@@ -2,10 +2,10 @@ import { SAVE_PRODUCT, GET_PRODUCTS_RESUME_SUCCESS, REMOVE_PRODUCT } from '../co
 import { getAllProductsResume, addProduct, updateProduct, removeProducts as removeProductsApi } from '../api/product'
 
 
-export const saveProduct = productsState => {
+export const saveProduct = addProductState => {
 
-  let productsResume = productsState.productsResume
-  let productToSave = productsState.productToSave
+  //let productsResume = //getProductsResume
+  let productToSave = addProductState.productToSave
   let productExists = false
 
   productsResume.forEach(function(product) {
