@@ -86,7 +86,9 @@ class App extends Component {
 
 App.propTypes = {
   productToSave: PropTypes.object.isRequired,
-  productsName: PropTypes.object.isRequired
+  productsName: PropTypes.object.isRequired,
+  productsResume: PropTypes.array.isRequired,
+  productsResumeTableFilter: PropTypes.array.isRequired
 }
 
 const mapStateToProps = (state) => {
@@ -95,7 +97,9 @@ const mapStateToProps = (state) => {
 
   return {
     productToSave: state.reducer.productToSave,
-    productsName: state.reducer.productsName
+    productsName: state.reducer.productsName,
+    productsResume: state.reducer.productsResume,
+    productsResumeTableFilter: state.reducer.productsResumeTableFilter
   }
 }
 
