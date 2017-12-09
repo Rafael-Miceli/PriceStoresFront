@@ -40,8 +40,6 @@ export const saveProduct = productsState => {
 
     productsState.productsName[productToSave.name] = null
   }
-  
-  productsState.productsResumeTableFilter = productsState.productsResume
 
   console.log("Salvando produto ", productsState)  
 
