@@ -1,4 +1,4 @@
-import { SAVE_PRODUCT, GET_PRODUCTS_RESUME, GET_PRODUCTS_RESUME_SUCCESS, REMOVE_PRODUCT } from '../constants/ActionTypes'
+import { SAVE_PRODUCT, GET_PRODUCTS_RESUME, GET_PRODUCTS_RESUME_SUCCESS, REMOVE_PRODUCT, SELECT_PRODUCT } from '../constants/ActionTypes'
 
 const defaultState = {
     productToSave:{
@@ -33,6 +33,8 @@ export const productReducer = (state = defaultState, action) => {
         case REMOVE_PRODUCT:  
             state = value
             return {...state}
+        case SELECT_PRODUCT:            
+            return {...state, productToSave: value}
         default:
             return state
     }

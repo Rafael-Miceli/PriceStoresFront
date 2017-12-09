@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import '../App.css'
 import configureStore from '../stores/productStores'
-import { getProductsResume, removeProducts } from '../actions/App'
+import { getProductsResume, removeProducts, selectProduct } from '../actions/App'
 import { Collection, CollectionItem, Input, Row, Button, Autocomplete } from 'react-materialize'
 import Modal from 'react-modal'
 
@@ -40,6 +40,7 @@ class ProductsList extends Component {
   }
 
   cellClick(product) {
+    store.dispatch(selectProduct({name: product, price: 0}))
     //Rever aqui
     // let productToSave = {...this.state.productToSave}
     // productToSave.name = product

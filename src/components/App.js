@@ -19,7 +19,14 @@ class App extends Component {
     this.state = props
   }
 
-  saveProduct() {
+  saveProduct() {    
+    if(this.state.productToSave.price <= 0)
+    {
+      this.setState({formError: 'Preço não pode ser vazio ou negativo'})
+      return      
+    }
+      
+    this.setState({formError: ''})
     store.dispatch(saveProduct(this.state))
     this.cleanFields()
   }
@@ -39,8 +46,11 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-        </div>        
+        </div>                  
           <h3>Adicione um Produto</h3>
+
+          <span style={{color: 'red'}}>{this.state.formError}</span>
+
           <Row>
             <Autocomplete
               s={6}

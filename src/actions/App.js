@@ -1,4 +1,4 @@
-import { SAVE_PRODUCT, GET_PRODUCTS_RESUME_SUCCESS, REMOVE_PRODUCT } from '../constants/ActionTypes'
+import { SAVE_PRODUCT, GET_PRODUCTS_RESUME_SUCCESS, REMOVE_PRODUCT, SELECT_PRODUCT } from '../constants/ActionTypes'
 import { getAllProductsResume, addProduct, updateProduct, removeProducts as removeProductsApi } from '../api/product'
 
 
@@ -130,6 +130,13 @@ export const removeProducts = productsState => {
   return {
     type: REMOVE_PRODUCT,
     value: productsState
+  }
+}
+
+export const selectProduct = selectedProduct => {
+  return {
+    type: SELECT_PRODUCT,
+    value: selectedProduct
   }
 }
 
