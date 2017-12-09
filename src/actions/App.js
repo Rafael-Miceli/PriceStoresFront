@@ -4,7 +4,7 @@ import { getAllProductsResume, addProduct, updateProduct, removeProducts as remo
 
 export const saveProduct = productsState => {
 
-  let productsResume = productsState.productsResume//getProductsResume
+  let productsResume = productsState.productsResume
   let productToSave = productsState.productToSave
   let productExists = false
 
