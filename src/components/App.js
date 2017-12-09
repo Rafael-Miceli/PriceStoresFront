@@ -27,7 +27,7 @@ class App extends Component {
   cleanFields() {    
     let productToSave = {...this.state.productToSave}
     productToSave.name = '';
-    productToSave.price = 0;    
+    productToSave.price = '0';    
     this.setState({productToSave})
 
     //Gambiarra porque ReactMaterialize Input não expõe focus
@@ -73,6 +73,7 @@ class App extends Component {
                 productToSave.price = e.target.value;
                 this.setState({productToSave})
               }} 
+              value={this.state.productToSave.price}
               />
           </Row>  
 
