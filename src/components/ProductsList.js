@@ -2,12 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import '../App.css'
-import configureStore from '../stores/productStores'
 import { getProductsResume, removeProducts, selectProduct } from '../actions/App'
 import { Collection, CollectionItem, Input, Row, Button, Autocomplete } from 'react-materialize'
 import Modal from 'react-modal'
-
-const { store, persistor } = configureStore()
 
 class ProductsList extends Component {
 
@@ -24,7 +21,7 @@ class ProductsList extends Component {
   }
 
   removeProducts() {
-    store.dispatch(removeProducts(this.state))
+    this.props.removeProducts(this.state)
     this.setState({modalIsOpen: false})
   }
 
@@ -40,11 +37,7 @@ class ProductsList extends Component {
   }
 
   cellClick(product) {
-    store.dispatch(selectProduct({name: product, price: 0}))
-    //Rever aqui
-    // let productToSave = {...this.state.productToSave}
-    // productToSave.name = product
-    // this.setState({productToSave})        
+    this.props.selectProduct({name: product, price: 0})
   }
 
   render() {
@@ -69,18 +62,18 @@ class ProductsList extends Component {
                   this.filterProductBy(productName)
                 }}  
                 data={
-                  this.state.productsName
+                  this.props.productsName
                 }
               />
           </Row>
 
-          {this.state.productsResumeTableFilter.map((productCategory, indexCategory) => {  
-            if (indexCategory > 0 && productCategory.categoryName === this.state.productsResumeTableFilter[(indexCategory - 1)].categoryName)
+          {this.props.productsResumeTableFilter.map((productCategory, indexCategory) => {  
+            if (indexCategory > 0 && productCategory.categoryName === this.props.productsResumeTableFilter[(indexCategory - 1)].categoryName)
               return (null)
 
             return ( 
               <Collection header={productCategory.categoryName} key={productCategory.categoryName}>
-                  {this.state.productsResumeTableFilter.map((product, index) => {  
+                  {this.props.productsResumeTableFilter.map((product, index) => {  
                     if(!product.checked)
                       product.checked = false
                       
@@ -90,7 +83,7 @@ class ProductsList extends Component {
                             <Input className='filled-in' type='checkbox' checked={product.checked} label={product.name} 
                               onChange={() => {
                                 
-                                let productsResume = this.state.productsResume.slice()
+                                let productsResume = this.props.productsResume.slice()
                                 let productChecked = productsResume.find(pr => pr.name === product.name)
                                 productChecked.checked = !product.checked
                                 
@@ -106,7 +99,7 @@ class ProductsList extends Component {
           })}            
 
           <Modal
-            isOpen={this.state.modalIsOpen}
+            isOpen={this.props.modalIsOpen}
             style={customStyles}
             contentLabel="Building" >
 
@@ -122,7 +115,7 @@ class ProductsList extends Component {
             <Button floating icon='delete_forever' className='red' onClick={() => {
               console.log("Preparando para deletar todos checkeds mostrar modal")
 
-              if(!this.state.productsResume.filter(p => p.checked).length)
+              if(!this.props.productsResume.filter(p => p.checked).length)
                 return
 
               this.setState({modalIsOpen: true})
@@ -146,14 +139,16 @@ const mapStateToProps = (state) => {
 
   return {
     productsResume: state.reducer.productsResume,
-    productsResumeTableFilter: state.reducer.productsResumeTableFilter,
+    productsResumeTableFilter: state.reducer.productsResume.slice(),
     productsName: state.reducer.productsName
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchProducts: () => dispatch(getProductsResume())
+    fetchProducts: () => dispatch(getProductsResume()),
+    removeProducts: (state) => dispatch(removeProducts(state)),
+    selectProduct: (selectedProduct) => dispatch(selectProduct(selectedProduct))
   }
 }
 

@@ -21,25 +21,33 @@ export const saveProduct = productsState => {
     }
   }, this)
 
-  if (!productExists) {
-    let productAdding = {name: productToSave.name, price: productToSave.price};
+  if (productExists) {
+    console.log("Salvando produto ", productsState)  
 
-    addProduct(productAdding, response => {
-      console.log("Adding: resultado vindo da api ", response)      
-    })
-
-    productsResume.push({
-      name: productToSave.name, 
-      lastPrice: productToSave.price,
-      lowerPrice: productToSave.price,
-      higherPrice: productToSave.price,
-      categoryName: "Sem Categoria"
-    })
-
-    productsResume.sort(productsComparer)
-
-    productsState.productsName[productToSave.name] = null
+    return {
+      type: SAVE_PRODUCT,
+      value: productsState
+    }
   }
+
+  let productAdding = {name: productToSave.name, price: productToSave.price};
+
+  addProduct(productAdding, response => {
+    console.log("Adding: resultado vindo da api ", response)      
+  })
+
+  productsResume.push({
+    name: productToSave.name, 
+    lastPrice: productToSave.price,
+    lowerPrice: productToSave.price,
+    higherPrice: productToSave.price,
+    categoryName: "Sem Categoria"
+  })
+
+  productsResume.sort(productsComparer)
+
+  productsState.productsName[productToSave.name] = null
+  
 
   console.log("Salvando produto ", productsState)  
 
@@ -94,13 +102,12 @@ export const getProductsResumeSuccess = (productsResume) => {
         price: 0
     },
     productsResume: [],
-    productsResumeTableFilter: [],
     productsName: {},
     modalIsOpen: false
   }
 
   defaultState.productsResume = productsResume.slice()
-  defaultState.productsResumeTableFilter = productsResume.slice()
+  //defaultState.productsResumeTableFilter = productsResume.slice()
 
   //Para o AutoComplete
   productsResume.forEach((product, i) => {
@@ -123,7 +130,7 @@ export const removeProducts = productsState => {
   removeProductsApi(productsToRemove.map(p => p.name))
 
   productsState.productsResume = productsResume.filter(p => !p.checked)
-  productsState.productsResumeTableFilter = productsState.productsResume
+  //productsState.productsResumeTableFilter = productsState.productsResume
 
   console.log('Estado de produtos removidos ', productsState)
 

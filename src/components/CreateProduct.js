@@ -2,16 +2,14 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import ReactDOM from 'react-dom'
-import configureStore from '../stores/productStores'
 import { saveProduct, removeProducts } from '../actions/App'
 import { Input, Row, Button, Autocomplete } from 'react-materialize'
 
-const { store, persistor } = configureStore()
 
 class CreateProduct extends Component {
 
   constructor(props) {
-    super(props)
+    super(props)    
 
     this.state = props
   }
@@ -24,7 +22,7 @@ class CreateProduct extends Component {
     }
       
     this.setState({formError: ''})
-    store.dispatch(saveProduct(this.state))
+    this.props.saveProduct(this.state)
     this.cleanFields()
   }
 
@@ -36,6 +34,11 @@ class CreateProduct extends Component {
 
     //Gambiarra porque ReactMaterialize Input não expõe focus
     ReactDOM.findDOMNode(this.nameInput).children[0].focus()
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log('CreateProduct props ', nextProps)
+    this.setState({productToSave: nextProps.productToSave})
   }
 
   render() {
@@ -66,7 +69,7 @@ class CreateProduct extends Component {
               }} 
               value={this.state.productToSave.name}
               data={
-                this.state.productsName
+                this.props.productsName
               }
             />              
             <Input s={6} type="number" 
@@ -77,7 +80,7 @@ class CreateProduct extends Component {
                 productToSave.price = e.target.value;
                 this.setState({productToSave})
               }} 
-              value={this.state.productToSave.price}
+              value={this.props.productToSave.price}
               />
           </Row>  
 
@@ -90,24 +93,25 @@ class CreateProduct extends Component {
 CreateProduct.propTypes = {
   productToSave: PropTypes.object.isRequired,
   productsName: PropTypes.object.isRequired,
-  productsResume: PropTypes.array.isRequired,
-  productsResumeTableFilter: PropTypes.array.isRequired
+  productsResume: PropTypes.array.isRequired
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
 
   console.log('mapStateToProps CreateProduct ', state)
 
   return {
     productToSave: state.reducer.productToSave,
     productsName: state.reducer.productsName,
-    productsResume: state.reducer.productsResume,
-    productsResumeTableFilter: state.reducer.productsResumeTableFilter
+    productsResume: state.reducer.productsResume
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {    
+    saveProduct: (state) => {
+      dispatch(saveProduct(state))
+    }    
   }
 }
 

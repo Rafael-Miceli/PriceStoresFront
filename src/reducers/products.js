@@ -33,7 +33,8 @@ export const productReducer = (state = defaultState, action) => {
         case REMOVE_PRODUCT:  
             state = value
             return {...state}
-        case SELECT_PRODUCT:            
+        case SELECT_PRODUCT:     
+            console.log('Selecionando produto ', value)
             return {...state, productToSave: value}
         default:
             return state
