@@ -80,7 +80,7 @@ class CreateProduct extends Component {
                 productToSave.price = e.target.value;
                 this.setState({productToSave})
               }} 
-              value={this.props.productToSave.price}
+              value={this.state.productToSave.price}
               />
           </Row>  
 
