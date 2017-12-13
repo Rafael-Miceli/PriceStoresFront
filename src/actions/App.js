@@ -13,7 +13,7 @@ export const saveProduct = productsState => {
       let productUpdating = {oldName: productToSave.name, newName: productToSave.name, price: productToSave.price}
       
       updateProduct(productUpdating, response => {
-        console.log("Update: resultado vindo da api ", response)        
+        console.log("Update: resultado vindo da api ", response)
       })
 
       updatePrice(product, productToSave.name, productToSave.price)
@@ -46,8 +46,7 @@ export const saveProduct = productsState => {
 
   productsResume.sort(productsComparer)
 
-  productsState.productsName[productToSave.name] = null
-  
+  productsState.productsName[productToSave.name] = null  
 
   console.log("Salvando produto ", productsState)  
 

@@ -13,11 +13,7 @@ class ProductsList extends Component {
 
     this.state = props
 
-    var result = this.props.fetchProducts()
-
-    result.then(response => {
-      this.setState(this.props)
-    })
+    this.props.fetchProducts()
   }
 
   removeProducts() {

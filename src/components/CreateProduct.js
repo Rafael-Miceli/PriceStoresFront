@@ -37,8 +37,9 @@ class CreateProduct extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log('CreateProduct props ', nextProps)
+    console.log('CreateProduct atualizando props ', nextProps)
     this.setState({productToSave: nextProps.productToSave})
+    this.setState({productsResume: nextProps.productsResume})
   }
 
   render() {
