@@ -18,6 +18,19 @@
 node {
     stage ('checkout') {
         git 'https://github.com/Rafael-Miceli/PriceStoresFront.git'
+        
+        //shortCommit = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
+        //Usar 'H' se quiser pegar o hash inteiro
+        //Comando melhor
+        //commit = sh(returnStdout: true, script: "git log -n 1 develop --pretty=format:'%H'").trim()
+        //echo shortCommit
+        
+        sh 'git rev-parse HEAD > commit'
+        def commit = readFile('commit').trim()
+        
+        echo commit
+        
+        env.GIT_COMMIT = commit
     }
 
     stage ('docker build') {
@@ -34,6 +47,4 @@ node {
         sh "docker push rafaelmiceli/pricestore-front:latest"
         sh "docker push rafaelmiceli/pricestore-front:${env.GIT_COMMIT}"
     }
-    
-
 }
