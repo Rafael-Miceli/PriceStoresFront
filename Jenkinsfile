@@ -47,4 +47,12 @@ node {
         sh "docker push rafaelmiceli/pricestore-front:latest"
         sh "docker push rafaelmiceli/pricestore-front:${env.GIT_COMMIT}"
     }
+
+    def notify(status) {
+        emailtext(
+            to: "email@teste.com",
+            subject: "${status}: Job '${env.JOB_NAME}'",
+            body: "Corpo do e-mail"
+        )
+    }
 }
