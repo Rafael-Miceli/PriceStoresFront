@@ -9,7 +9,7 @@ const config = {
   key: 'root',
   storage,
   debug: true
-}
+} 
 
 const middleware = [ thunk ];
 if (process.env.NODE_ENV !== 'production') {
